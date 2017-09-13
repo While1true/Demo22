@@ -1,4 +1,4 @@
-package com.kxjsj.doctorassistant.Net.Rx;
+package com.kxjsj.doctorassistant.Rx;
 
 import java.util.ArrayList;
 import java.util.HashMap;

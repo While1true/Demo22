@@ -1,11 +1,10 @@
-package com.kxjsj.doctorassistant.Net.Rx.Utils;
+package com.kxjsj.doctorassistant.Rx.Utils;
 
-import com.kxjsj.doctorassistant.Net.Rx.BaseObserver;
+import com.kxjsj.doctorassistant.Rx.BaseObserver;
 
 import java.io.File;
 import java.io.IOException;
 
-import io.reactivex.Observer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;

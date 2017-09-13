@@ -1,8 +1,8 @@
-package com.kxjsj.doctorassistant.Net.Rx.Component;
+package com.kxjsj.doctorassistant.Rx.Component;
 
 import android.support.v4.app.Fragment;
 
-import com.kxjsj.doctorassistant.Net.Rx.RxLifeUtils;
+import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
 
 /**
  * Created by vange on 2017/9/12.

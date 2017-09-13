@@ -1,6 +1,4 @@
-package com.kxjsj.doctorassistant.Net.Rx;
-
-import android.widget.Toast;
+package com.kxjsj.doctorassistant.Rx;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

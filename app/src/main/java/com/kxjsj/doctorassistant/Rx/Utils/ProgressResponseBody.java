@@ -1,6 +1,6 @@
-package com.kxjsj.doctorassistant.Net.Rx.Utils;
+package com.kxjsj.doctorassistant.Rx.Utils;
 
-import com.kxjsj.doctorassistant.Net.Rx.BaseObserver;
+import com.kxjsj.doctorassistant.Rx.BaseObserver;
 
 import java.io.IOException;
 

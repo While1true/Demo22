@@ -1,7 +1,7 @@
-package com.kxjsj.doctorassistant.Net.Rx.Utils;
+package com.kxjsj.doctorassistant.Rx.Utils;
 
 
-import com.kxjsj.doctorassistant.Net.Rx.BaseBean;
+import com.kxjsj.doctorassistant.Rx.BaseBean;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Predicate;

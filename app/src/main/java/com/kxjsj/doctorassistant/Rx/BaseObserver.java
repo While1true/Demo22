@@ -1,4 +1,4 @@
-package com.kxjsj.doctorassistant.Net.Rx;
+package com.kxjsj.doctorassistant.Rx;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
