@@ -13,7 +13,7 @@ import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
  * Created by vange on 2017/9/12.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseTitleFragment extends Fragment {
 
     @Nullable
     @Override

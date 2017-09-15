@@ -10,7 +10,7 @@ import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
  * Created by vange on 2017/9/12.
  */
 
-public abstract class BaseAppCompatActivity extends AppCompatActivity {
+public abstract class BaseTitleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

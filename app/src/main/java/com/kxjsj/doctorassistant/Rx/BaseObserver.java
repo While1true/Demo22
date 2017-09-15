@@ -9,12 +9,17 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
     private static final String TAG = "BaseObserver";
+    private String tag = null;
+    Disposable d;
 
     protected BaseObserver(String tag) {
+        this.tag = tag;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
+        this.d = d;
+        RxLifeUtils.getInstance().add(tag, d);
     }
 
 
@@ -34,11 +39,14 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
 
     @Override
     public void onComplete() {
+        if (d != null && !d.isDisposed())
+            d.isDisposed();
     }
 
     protected abstract void onHandleSuccess(T t);
 
-    public void onProgress(String tag,long current,long total){}
+    public void onProgress(String tag, long current, long total) {
+    }
 
     protected void onHandleError(String msg) {
     }
