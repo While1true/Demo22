@@ -39,7 +39,7 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
                 onNavigationClicked();
             }
         });
-        content.addView(getLayoutInflater().inflate(getContentLayoutId(), content, true));
+        getLayoutInflater().inflate(getContentLayoutId(), content, true);
         initView();
 
     }

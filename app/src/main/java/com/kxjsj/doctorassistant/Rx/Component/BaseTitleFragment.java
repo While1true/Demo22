@@ -48,7 +48,7 @@ public abstract class BaseTitleFragment extends Fragment {
                 onNavigationClicked();
             }
         });
-        content.addView(getLayoutInflater().inflate(getLayoutId(),content,true));
+        getLayoutInflater().inflate(getLayoutId(),content,true);
         initView();
     }
 
