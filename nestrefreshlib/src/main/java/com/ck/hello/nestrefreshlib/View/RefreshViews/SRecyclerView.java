@@ -24,7 +24,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,7 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.DefaultRefreshWrap;
+import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.EmptyRefreshWrap;
 import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.RefreshWrapBase;
 import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.WrapInterface;
 
@@ -44,7 +44,7 @@ import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.WrapInterface;
  * 出列快速滑动时的处理不是很完美，但能用
  */
 
-public class SRecyclerView extends LinearLayout implements NestedScrollingParent,WrapInterface {
+public class SRecyclerView extends LinearLayout implements NestedScrollingParent, WrapInterface {
     public static final String TAG = "SRecyclerView";
     private NestedScrollingParentHelper scrollingParentHelper;
     private LinearLayout headLayout;
@@ -91,8 +91,8 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
     private boolean actruallyHead = true, actruallyFoot = true;
     private boolean prenomore = true;
     //头布局
-    private RefreshWrapBase headerRefreshWrap;
-    private RefreshWrapBase footerRefreshWrap;
+    private RefreshWrapBase headerRefreshWrap = new EmptyRefreshWrap(this, true);
+    private RefreshWrapBase footerRefreshWrap = new EmptyRefreshWrap(this, false);
 
 
     @Override
@@ -116,11 +116,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
 
     public LinearLayout getFootLayout() {
         return footLayout;
-    }
-
-    @Override
-    public ViewGroup getParentView() {
-        return this;
     }
 
     public SRecyclerView(Context context) {
@@ -150,6 +145,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
         addView(headLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(myRecyclerView, new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         addView(footLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
     }
 
     public SRecyclerView setRefreshMode(boolean head, boolean foot, boolean canLoadingHeader, boolean canloadingFooter) {
@@ -190,7 +186,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
     }
 
     public SRecyclerView setRefreshing() {
-        headLayout.postDelayed(new Runnable() {
+        headLayout.post(new Runnable() {
             @Override
             public void run() {
                 scrolls = headerRefreshWrap.getHeight();
@@ -201,7 +197,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
                     listener.Refreshing();
                 }
             }
-        }, 300);
+        });
         return this;
     }
 
@@ -348,7 +344,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
             if (myRecyclerView.canPull(-1) && dy > 0 && scrolls < 0) {
                 scrolls += dy;
                 if (scrolls <= 0) {
-                    Log.i(TAG, "onNestedPreScroll:下拉回拉时 ");
                     if (actruallyHead)
                         scrollTo(0, scrolls / pullRate);
 
@@ -374,7 +369,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
             if (myRecyclerView.canPull(1) && dy < 0 && scrolls > 0) {
                 scrolls += dy;
                 if (scrolls >= 0) {
-                    Log.i(TAG, "onNestedPreScroll:上拉回拉时 ");
                     if (actruallyFoot)
                         scrollTo(0, scrolls / pullRate);
                     consumed[1] = dy;
@@ -401,7 +395,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
         //TODO拉动的处理
         if ((myRecyclerView.canPull(-1) && dyUnconsumed < 0 && canheader) || (myRecyclerView.canPull(1) && dyUnconsumed > 0 && canfooter)) {
             scrolls += dyUnconsumed;
-            Log.i(TAG, "onNestedScroll: " + dyUnconsumed);
             int pull = scrolls / pullRate;
             if (scrolls < 0 && actruallyHead)
                 scrollTo(0, pull);
@@ -414,7 +407,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
                     footerRefreshWrap.onPull(pull);
                 } else {
                     listener.pullDown(pull);
-                  headerRefreshWrap.onPull(pull);
+                    headerRefreshWrap.onPull(pull);
                 }
             }
         }
@@ -455,7 +448,9 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
 
 
     public void notifyRefreshComplete() {
-        Log.i(TAG, "notifyRefreshComplete: smoothScroll");
+        if (animator != null) {
+            animator.cancel();
+        }
         footerRefreshWrap.onComplete();
         headerRefreshWrap.onComplete();
         long current = System.currentTimeMillis() - beginRefreshing;
@@ -465,7 +460,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
                 isLoading = false;
                 smoothScroll(scrolls / pullRate, 0, scrolls >= 0 ? SCROLLTYPE.PULLUP : SCROLLTYPE.PULLDOWN);
             }
-        }, current > 500 ? 100 : 500);
+        }, current > 550 ? 100 : 550);
     }
 
     public void notifyRefreshComplete(boolean prenomore) {
@@ -476,12 +471,10 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
     @Override
     public void onStopNestedScroll(View child) {
         scrollingParentHelper.onStopNestedScroll(child);
-        Log.i(TAG, "onStopNestedScroll: 111");
         if (isLoading) {
             return;
         }
         int pull = scrolls / pullRate;
-        Log.i(TAG, "onStopNestedScroll:222 ");
         if (pull <= -headerRefreshWrap.getHeight() && canLoadingHeader) {
             if (listener != null && !isLoading) {
                 headerRefreshWrap.onRefresh();
@@ -489,7 +482,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
                 beginRefreshing = System.currentTimeMillis();
             }
             isLoading = true;
-            smoothScroll(pull, -footerRefreshWrap.getHeight(), SCROLLTYPE.PULLDOWN);
+            smoothScroll(pull, -headerRefreshWrap.getHeight(), SCROLLTYPE.PULLDOWN);
         } else if (pull >= footerRefreshWrap.getHeight() && canLoadingFooter) {
 
             if (listener != null && !isLoading) {
@@ -499,7 +492,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
             isLoading = true;
             smoothScroll(pull, footerRefreshWrap.getHeight(), SCROLLTYPE.PULLUP);
         } else {
-            Log.i(TAG, "onStopNestedScroll: 3333");
             smoothScroll(pull, 0, scrolls >= 0 ? SCROLLTYPE.PULLUP : SCROLLTYPE.PULLDOWN);
         }
     }
@@ -507,7 +499,6 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
     private void smoothScroll(final int from, final int to, final SCROLLTYPE type) {
         if (from == to)
             return;
-        Log.i(TAG, "smoothScroll: " + from + "-" + to);
         if (animator != null) {
             animator.cancel();
             animator.setIntValues(from, to);
@@ -556,7 +547,7 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
         scrollingParentHelper.onNestedScrollAccepted(child, target, axes);
     }
 
-    private class MyRecyclerView extends RecyclerView {
+    private static class MyRecyclerView extends RecyclerView {
         private StaggeredGridLayoutManager staggeredGridLayoutManager = null;
         private LinearLayoutManager linearLayoutManager = null;
         private GridLayoutManager gridLayoutManager = null;
