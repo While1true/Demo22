@@ -46,9 +46,8 @@ public class AdjustUtils {
         /**
          * 同设计尺寸就直接返回
          */
-        checkIfNotNeedAdjust(application);
-//        if (checkIfNotNeedAdjust(application))
-//            return;
+        if (checkIfNotNeedAdjust(application))
+            return;
         /**
          * 获取相关参数
          */
@@ -193,9 +192,8 @@ public class AdjustUtils {
      * @param params
      */
     public static void adjustConstraintLayout(View child, ViewGroup.LayoutParams params) {
-        checkIfNotNeedAdjust(child.getContext());
-//        if (checkIfNotNeedAdjust(child.getContext()))
-//            return;
+        if (checkIfNotNeedAdjust(child.getContext()))
+            return;
         transformSize(child, (ConstraintLayout.LayoutParams) params);
         if (child instanceof ViewGroup && !(child instanceof ConstraintLayout))
             initChildViewGroup((ViewGroup) child, (ViewGroup.MarginLayoutParams) params);
