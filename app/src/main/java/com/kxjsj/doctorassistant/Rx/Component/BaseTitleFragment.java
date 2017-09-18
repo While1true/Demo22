@@ -49,7 +49,7 @@ public abstract class BaseTitleFragment extends Fragment {
             }
         });
         getLayoutInflater().inflate(getLayoutId(),content,true);
-        initView();
+        initView(savedInstanceState);
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class BaseTitleFragment extends Fragment {
      * 返回按钮
      */
     protected abstract void onNavigationClicked();
-    protected abstract void initView();
+    protected abstract void initView(Bundle savedInstanceState);
 
     /**
      * 内容布局id

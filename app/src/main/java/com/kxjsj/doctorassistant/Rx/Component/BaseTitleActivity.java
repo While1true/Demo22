@@ -40,7 +40,7 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
             }
         });
         getLayoutInflater().inflate(getContentLayoutId(), content, true);
-        initView();
+        initView(savedInstanceState);
 
     }
 
@@ -49,7 +49,7 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
     /**
      * 初始化组件
      */
-    protected abstract void initView();
+    protected abstract void initView( Bundle savedInstanceState);
 
     /**
      * 中间title

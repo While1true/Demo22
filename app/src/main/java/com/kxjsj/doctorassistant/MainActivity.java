@@ -1,6 +1,5 @@
 package com.kxjsj.doctorassistant;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kxjsj.doctorassistant.Rx.Component.BaseTitleActivity;
@@ -14,7 +13,7 @@ public class MainActivity extends BaseTitleActivity {
     }
 
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
         setTitle("drfedf");
 
     }
