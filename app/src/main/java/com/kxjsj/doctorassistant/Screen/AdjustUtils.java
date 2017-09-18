@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+
 import java.lang.reflect.Field;
 
 import static android.content.Context.WINDOW_SERVICE;
@@ -34,6 +35,7 @@ public class AdjustUtils {
     private static final int DESIGN_HEIGHT = 1920;
     private static final float DESIGN_SCALE = 3.0f;
     public static float mScale = 0;
+    public static float mFontScalePercentage = 0;
     public static float mFontScale = 0;
     public static float mScaleX = 0;
     public static float mScaleY = 0;
@@ -44,8 +46,9 @@ public class AdjustUtils {
         /**
          * 同设计尺寸就直接返回
          */
-        if (checkIfNotNeedAdjust(application))
-            return;
+        checkIfNotNeedAdjust(application);
+//        if (checkIfNotNeedAdjust(application))
+//            return;
         /**
          * 获取相关参数
          */
@@ -124,11 +127,13 @@ public class AdjustUtils {
         mScale = minScale * density;
         mScaleX *= density;
         mScaleY *= density;
-        mFontScale = minScale * scaleDensity;
+        mFontScalePercentage = minScale * scaleDensity;
+        mFontScale = minScale * scaleDensity * context.getResources().getDisplayMetrics().scaledDensity;
     }
 
     /**
      * 改变全局density参数
+     *
      * @param context
      */
     private static void AdjustApplicationDensity(Context context) {
@@ -137,7 +142,7 @@ public class AdjustUtils {
 
 
         if (type == TYPE_FONT) {
-            displayMetrics.scaledDensity = mFontScale;
+            displayMetrics.scaledDensity = mFontScalePercentage;
 
             DisplayMetrics metrics = getMetricsOnMiui(resources);
             if (metrics != null)
@@ -188,8 +193,9 @@ public class AdjustUtils {
      * @param params
      */
     public static void adjustConstraintLayout(View child, ViewGroup.LayoutParams params) {
-        if (checkIfNotNeedAdjust(child.getContext()))
-            return;
+        checkIfNotNeedAdjust(child.getContext());
+//        if (checkIfNotNeedAdjust(child.getContext()))
+//            return;
         transformSize(child, (ConstraintLayout.LayoutParams) params);
         if (child instanceof ViewGroup && !(child instanceof ConstraintLayout))
             initChildViewGroup((ViewGroup) child, (ViewGroup.MarginLayoutParams) params);
@@ -232,6 +238,7 @@ public class AdjustUtils {
                 params.height *= mScaleY;
             }
         }
+
 
         //margin
         params.leftMargin *= mScaleX;
