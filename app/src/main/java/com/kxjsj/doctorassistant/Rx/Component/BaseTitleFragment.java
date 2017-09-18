@@ -41,7 +41,6 @@ public abstract class BaseTitleFragment extends Fragment {
         toolbar=view.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         tv_title = view.findViewById(R.id.title);
-        tv_title.setText(setTitle());
         iv_menu = view.findViewById(R.id.menu);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +56,9 @@ public abstract class BaseTitleFragment extends Fragment {
      * 设置标题
      * @return
      */
-    protected abstract CharSequence setTitle();
+    public void setTitle(CharSequence title){
+        tv_title.setText(title);
+    }
 
     /**
      * 返回按钮

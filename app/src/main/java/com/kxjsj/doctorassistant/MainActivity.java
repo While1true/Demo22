@@ -15,11 +15,8 @@ public class MainActivity extends BaseTitleActivity {
 
     @Override
     protected void initView() {
+        setTitle("drfedf");
 
     }
 
-    @Override
-    protected CharSequence setTitle() {
-        return "到年底就";
-    }
 }

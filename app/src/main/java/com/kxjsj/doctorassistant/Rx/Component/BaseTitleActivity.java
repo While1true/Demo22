@@ -31,7 +31,6 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         tv_title = findViewById(R.id.title);
-        tv_title.setText(setTitle());
         iv_menu = findViewById(R.id.menu);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -57,7 +56,9 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
      *
      * @return
      */
-    protected abstract CharSequence setTitle();
+    public void setTitle(CharSequence title){
+        tv_title.setText(title);
+    }
 
     /**
      * 右上角菜单
