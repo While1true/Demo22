@@ -39,6 +39,7 @@ public abstract class BaseTitleFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         LinearLayout content=view.findViewById(R.id.root);
         toolbar=view.findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         tv_title = view.findViewById(R.id.title);
         tv_title.setText(setTitle());
         iv_menu = view.findViewById(R.id.menu);

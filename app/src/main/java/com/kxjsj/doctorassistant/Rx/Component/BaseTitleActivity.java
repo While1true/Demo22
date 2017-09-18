@@ -29,6 +29,7 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
         setContentView(R.layout.titlebar_layout);
         LinearLayout content = findViewById(R.id.root);
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         tv_title = findViewById(R.id.title);
         tv_title.setText(setTitle());
         iv_menu = findViewById(R.id.menu);
