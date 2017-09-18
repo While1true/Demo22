@@ -2,6 +2,8 @@ package com.kxjsj.doctorassistant;
 
 import android.app.Application;
 
+import com.kxjsj.doctorassistant.Screen.AdjustUtils;
+
 
 /**
  * Created by vange on 2017/9/6.
@@ -21,9 +23,7 @@ public class App extends Application {
             }
         }).start();
 
-//        //屏幕适配
-//        int designWidth = 375;
-//        new RudenessScreenHelper(this, designWidth).activate();
+        AdjustUtils.Adjust(this, AdjustUtils.TYPE_DP);
     }
 
     private void init() {
