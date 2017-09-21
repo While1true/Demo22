@@ -22,6 +22,8 @@ public class RongPushReceiver extends PushMessageReceiver {
 
     @Override
     public boolean onNotificationMessageClicked(Context context, PushNotificationMessage pushNotificationMessage) {
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG, "onNotificationMessageClicked: "+pushNotificationMessage.getExtra());
         return false;
     }
 }

@@ -52,7 +52,6 @@ public class IndicateRadioButton extends android.support.v7.widget.AppCompatRadi
     }
 
     RectF rect = new RectF();
-    Rect bounds=new Rect();
     @Override
     public void onDrawForeground(Canvas canvas) {
         super.onDrawForeground(canvas);
@@ -75,6 +74,7 @@ public class IndicateRadioButton extends android.support.v7.widget.AppCompatRadi
          * 右上角
          * draw背景
          */
+        paint.setTextSize(indicatesize);
         float v = paint.measureText(indicate + "");
         rect.set(width - v - indicateRadius * 2, 0, width, indicateRadius * 2);
         canvas.drawRoundRect(rect, indicateRadius, indicateRadius, paint);
@@ -82,10 +82,9 @@ public class IndicateRadioButton extends android.support.v7.widget.AppCompatRadi
          * 画数字
          */
         paint.setColor(indicateTextColor);
-        paint.setTextSize(indicatesize);
+
         Paint.FontMetrics fm = paint.getFontMetrics();
         float baseLineY = indicateRadius -(fm.ascent - (fm.ascent - fm.descent) / 2);
-        paint.getTextBounds(indicate+"",0,(indicate+"").length(),bounds);
         canvas.drawText(indicate + "", width - v - indicateRadius, baseLineY, paint);
 
     }

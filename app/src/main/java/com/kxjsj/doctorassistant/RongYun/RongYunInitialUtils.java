@@ -31,7 +31,6 @@ public class RongYunInitialUtils {
          * miAppId
          * miAppKey
          */
-        MiPushClient.registerPush(application,"2882303761517618970", "5841761810970");
         RongPushClient.registerMiPush(application, "2882303761517618970", "5841761810970");
         /**
          *

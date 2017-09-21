@@ -12,41 +12,27 @@ import com.xiaomi.mipush.sdk.PushMessageReceiver;
 
 import java.util.List;
 
+import io.rong.push.platform.MiMessageReceiver;
+
 /**
  * Created by vange on 2017/9/21.
  */
 
-public class MiPushReceiver extends PushMessageReceiver {
-
+public class MiPushReceiver extends MiMessageReceiver {
+//传递给融云处理了，我只拿到resid给服务器来进行自己的推送
     String mRegId;
 
     @Override
-    public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
-        super.onNotificationMessageClicked(context, miPushMessage);
-    }
-
-    @Override
-    public void onNotificationMessageArrived(Context context, MiPushMessage miPushMessage) {
-        super.onNotificationMessageArrived(context, miPushMessage);
-        if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG, "onNotificationMessageArrived: "+miPushMessage.getTitle());
-    }
-
-    @Override
-    public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
+    public void onCommandResult(Context context, MiPushCommandMessage message) {
         String command = message.getCommand();
         List<String> arguments = message.getCommandArguments();
-        String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
-        String cmdArg2 = ((arguments != null && arguments.size() > 1) ? arguments.get(1) : null);
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
-                mRegId = cmdArg1;
+                mRegId = arguments.get(0);
                 if (Constance.DEBUGTAG)
-                    Log.i(Constance.DEBUG, "onReceiveRegisterResult: "+mRegId);
-                //上传到服务器 用于发送推送消息
-                //设置别名
-                MiPushClient.setAlias(context,"123","123");
+                    Log.i(Constance.DEBUG, "onCommandResult: "+mRegId);
             }
         }
+        super.onCommandResult(context, message);
     }
 }
