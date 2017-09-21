@@ -8,10 +8,13 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+
+import com.kxjsj.doctorassistant.Constant.Constance;
 
 import java.lang.reflect.Field;
 
@@ -31,13 +34,15 @@ public class AdjustUtils {
      */
     public static final int TYPE_FONT = 0, TYEP_PT = 1, TYPE_DP = 2;
     private static int type;
-    private static final int DESIGN_WIDTH = 1080;
-    private static final int DESIGN_HEIGHT = 1920;
-    private static final float DESIGN_SCALE = 3.0f;
+    private static final int DESIGN_WIDTH = 1920;
+    private static final int DESIGN_HEIGHT = 1200;
+    private static final float DESIGN_SCALE = 2.0f;
     public static float mScale = 0;
     public static float mFontScalePercentage = 0;
     public static float mFontScale = 0;
+    public static float mScaleXPercentage = 0;
     public static float mScaleX = 0;
+    public static float mScaleYPercentage = 0;
     public static float mScaleY = 0;
     private static Point point;
 
@@ -99,8 +104,10 @@ public class AdjustUtils {
     private static boolean checkIfNotNeedAdjust(Context context) {
         point = new Point();
         ((WindowManager) context.getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getSize(point);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG, "getSacleXY: point.x"+point.x+"--point.y"+point.y);
         float density = context.getResources().getDisplayMetrics().density;
-        return point.x == DESIGN_WIDTH && density == DESIGN_SCALE;
+        return point.x == Math.max(DESIGN_WIDTH,DESIGN_HEIGHT) && density == DESIGN_SCALE;
     }
 
     /**
@@ -109,24 +116,22 @@ public class AdjustUtils {
      * @param context
      */
     private static void getSacleXY(Context context) {
-        //横屏
-        if (point.x > point.y) {
-            mScaleX = (point.x * 1.0f / DESIGN_HEIGHT);
-            mScaleY = (point.y * 1.0f / DESIGN_WIDTH);
-        } else {//竖屏
-            mScaleX = (point.x * 1.0f / DESIGN_WIDTH);
-            mScaleY = (point.y * 1.0f / DESIGN_HEIGHT);
-        }
-//        //等宽缩放
-//        mScaleY = mScaleX;
+            mScaleXPercentage = (point.x * 1.0f / Math.max(DESIGN_WIDTH,DESIGN_HEIGHT));
+            mScaleYPercentage = (point.y * 1.0f / Math.min(DESIGN_WIDTH,DESIGN_HEIGHT));
 
+        //等宽缩放
+//        mScaleY = mScaleX;
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG, "getSacleXY: "+context.getResources().getDisplayMetrics().density);
         float density = DESIGN_SCALE / context.getResources().getDisplayMetrics().density;
         float scaleDensity = DESIGN_SCALE / context.getResources().getDisplayMetrics().scaledDensity;
-        float minScale = Math.min(mScaleX, mScaleY);
+        float minScale = Math.min(mScaleXPercentage, mScaleYPercentage);
         mScale = minScale * density;
-        mScaleX *= density;
-        mScaleY *= density;
+        mScaleXPercentage *= density;
+        mScaleYPercentage *= density;
         mFontScalePercentage = minScale * scaleDensity;
+        mScaleX=mScaleXPercentage*context.getResources().getDisplayMetrics().density;
+        mScaleY=mScaleYPercentage*context.getResources().getDisplayMetrics().density;
         mFontScale = minScale * scaleDensity * context.getResources().getDisplayMetrics().scaledDensity;
     }
 
@@ -229,25 +234,25 @@ public class AdjustUtils {
         } else {
             //width
             if (params.width > 0) {
-                params.width *= mScaleX;
+                params.width *= mScaleXPercentage;
             }
             //height
             if (params.height > 0) {
-                params.height *= mScaleY;
+                params.height *= mScaleYPercentage;
             }
         }
 
 
         //margin
-        params.leftMargin *= mScaleX;
-        params.topMargin *= mScaleY;
-        params.rightMargin *= mScaleX;
-        params.bottomMargin *= mScaleY;
+        params.leftMargin *= mScaleXPercentage;
+        params.topMargin *= mScaleYPercentage;
+        params.rightMargin *= mScaleXPercentage;
+        params.bottomMargin *= mScaleYPercentage;
         //padding
-        int paddingLeft = (int) (child.getPaddingLeft() * mScaleX);
-        int paddingTop = (int) (child.getPaddingTop() * mScaleY);
-        int paddingRight = (int) (child.getPaddingRight() * mScaleX);
-        int paddingBottom = (int) (child.getPaddingBottom() * mScaleY);
+        int paddingLeft = (int) (child.getPaddingLeft() * mScaleXPercentage);
+        int paddingTop = (int) (child.getPaddingTop() * mScaleYPercentage);
+        int paddingRight = (int) (child.getPaddingRight() * mScaleXPercentage);
+        int paddingBottom = (int) (child.getPaddingBottom() * mScaleYPercentage);
         child.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
 

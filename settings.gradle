@@ -1,1 +1,1 @@
-include ':app', ':nestrefreshlib'
+include ':app', ':nestrefreshlib', ':IMKit', ':IMLib', ':CallKit', ':CallLib'

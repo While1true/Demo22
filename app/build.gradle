@@ -1,14 +1,19 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.kxjsj.doctorassitant"
-        minSdkVersion 14
-        targetSdkVersion 25
+        applicationId "com.kxjsj.doctorassistant"
+        minSdkVersion 15
+        targetSdkVersion 22
+        multiDexEnabled = true
         versionCode 1
         versionName "1.0"
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -16,10 +21,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions{
+        javaMaxHeapSize "2g"
+        jumboMode = true
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -51,4 +65,10 @@ dependencies {
     //文件夹适配
     compile 'com.zhy.base:fileprovider:1.0.0'
     compile project(':nestrefreshlib')
+    compile project(':IMKit')
+    //    compile 'com.github.liangzhongtai:TipTextView:v1.0'
+    compile project(':CallKit')
+    //图片显示
+//    compile 'com.github.bumptech.glide:glide:4.1.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
 }

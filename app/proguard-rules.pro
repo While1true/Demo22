@@ -23,3 +23,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn io.rong.push.**
+ -dontnote com.xiaomi.**
+-dontnote com.google.android.gms.gcm.**
+ -dontnote io.rong.**
+-keep class com.kxjsj.doctorassistant.RongYun.RongPushReceiver {*;}
+
+
+-keep class com.kxjsj.doctorassistant.Mipush.MiPushReceiver {*;}
+-keep public class * extends android.content.BroadcastReceiver
