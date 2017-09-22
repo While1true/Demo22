@@ -14,16 +14,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxSchedulers {
     public static <T> ObservableTransformer<T, T> compose() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io()).doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        //TODO
-                    }
-                }).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> {
+            //TODO
+        }).observeOn(AndroidSchedulers.mainThread());
     }
 }

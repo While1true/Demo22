@@ -2,11 +2,13 @@ package com.kxjsj.doctorassistant.Rx;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by vange on 2017/9/13.
  */
 
-public class BaseBean<E> {
+public class BaseBean<E> implements Serializable {
     @SerializedName("code")
     private int code;
     @SerializedName("msg")

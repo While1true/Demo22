@@ -23,17 +23,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#RongYUN
 -dontwarn io.rong.push.**
  -dontnote com.xiaomi.**
 -dontnote com.google.android.gms.gcm.**
  -dontnote io.rong.**
 -keep class com.kxjsj.doctorassistant.RongYun.RongPushReceiver {*;}
 
-
+#Mipush
 -keep class com.kxjsj.doctorassistant.Mipush.MiPushReceiver {*;}
 -keep public class * extends android.content.BroadcastReceiver
 
 
+#Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.AppGlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
@@ -43,3 +45,11 @@
 
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+#retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+#okhttp
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**

@@ -48,7 +48,7 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
     /**
      * 中间title
      *
-     * @return
+     * @CharSequence title
      */
     public void setTitle(CharSequence title){
         tv_title.setText(title);
