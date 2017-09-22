@@ -4,7 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorecRed">#ff5b54</color>
     <color name="colorffRed">#ffb5b2</color>
+
+
+    <color name="titleColorWhite">#FFFFFF</color>
+    <color name="background">#f0f0f0</color>
+    <color name="navi_checked">#79C4A0</color>
+    <color name="navi_unchecked">#535353</color>
 </resources>

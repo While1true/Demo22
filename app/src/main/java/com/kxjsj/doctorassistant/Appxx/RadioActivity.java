@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideOption;
+import com.bumptech.glide.request.RequestOptions;
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
@@ -30,6 +33,11 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * Created by vange on 2017/9/19.
@@ -78,7 +86,6 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
                     Log.i(Constance.DEBUG, "onError: ");
             }
         });
-
         rgGroup.setOnCheckedChangeListener(this);
         rgGroup.check(R.id.rb_sickbed);
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -110,7 +117,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         requestPermission();
         RongIM.getInstance().addUnReadMessageCountChangedObserver(i -> {
             tipTextView.setIndicate(i);
-        }, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
+        },Conversation.ConversationType.CHATROOM,Conversation.ConversationType.NONE,Conversation.ConversationType.SYSTEM,Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
     }
 
     @Override

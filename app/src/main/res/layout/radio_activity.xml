@@ -10,7 +10,7 @@
         android:dividerPadding="2dp"
         android:divider="#666666"
         android:paddingRight="2dp"
-        android:background="#f0f0f0"
+        android:background="@color/background"
         android:id="@+id/rg_group"
         android:elevation="2dp"
         android:layout_width="95dp"

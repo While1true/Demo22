@@ -1,0 +1,17 @@
+
+
+
+##Crop
+CropTransformation, CropCircleTransformation, CropSquareTransformation, RoundedCornersTransformation
+
+
+##Color
+ColorFilterTransformation, GrayscaleTransformation
+
+
+##Blur
+BlurTransformation
+
+
+##Mask
+MaskTransformation
