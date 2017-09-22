@@ -1,6 +1,6 @@
 package com.kxjsj.doctorassistant.Rx.Utils;
 
-import com.kxjsj.doctorassistant.Rx.BaseObserver;
+import com.kxjsj.doctorassistant.Rx.MyObserver;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,10 +20,10 @@ import okio.Sink;
 
 public class ProgressRequestBody extends RequestBody {
     private RequestBody mRequestBody;
-    private BaseObserver<ResponseBody> fileUploadObserver;
+    private MyObserver<ResponseBody> fileUploadObserver;
     String tag=null;
 
-    public ProgressRequestBody(File file, BaseObserver<ResponseBody> fileUploadObserver) {
+    public ProgressRequestBody(File file, MyObserver<ResponseBody> fileUploadObserver) {
         this.mRequestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         this.fileUploadObserver = fileUploadObserver;
         tag=file.getName();
@@ -61,7 +61,7 @@ public class ProgressRequestBody extends RequestBody {
             super.write(source, byteCount);
             bytesWritten += byteCount;
             if (fileUploadObserver != null) {
-                fileUploadObserver.onProgress(tag,bytesWritten, contentLength());
+                fileUploadObserver.onProgress(bytesWritten, contentLength());
             }
         }
     }

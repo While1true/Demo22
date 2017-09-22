@@ -1,6 +1,6 @@
 package com.kxjsj.doctorassistant.Rx.Utils;
 
-import com.kxjsj.doctorassistant.Rx.BaseObserver;
+import com.kxjsj.doctorassistant.Rx.MyObserver;
 
 import java.io.IOException;
 
@@ -19,9 +19,9 @@ import okio.Source;
 public class ProgressResponseBody extends ResponseBody {
     private ResponseBody responseBody;
     private BufferedSource bufferedSource;
-    private BaseObserver<ResponseBody> downObserve;
+    private MyObserver<ResponseBody> downObserve;
 
-    public ProgressResponseBody(ResponseBody responseBody, BaseObserver<ResponseBody> downObserve) {
+    public ProgressResponseBody(ResponseBody responseBody, MyObserver<ResponseBody> downObserve) {
         this.responseBody = responseBody;
         this.downObserve = downObserve;
     }
@@ -52,7 +52,8 @@ public class ProgressResponseBody extends ResponseBody {
             public long read(Buffer sink, long byteCount) throws IOException {
                 long bytesRead = super.read(sink, byteCount);
                 bytesReaded += bytesRead == -1 ? 0 : bytesRead; //实时发送当前已读取的字节和总字节
-                downObserve.onProgress(null,bytesRead, contentLength());
+                if(downObserve!=null)
+                downObserve.onProgress(bytesRead, contentLength());
                 return bytesRead;
             }
         };

@@ -1,7 +1,17 @@
 package com.kxjsj.doctorassistant.Utils;
 
 
+import android.os.Environment;
+
+import com.kxjsj.doctorassistant.Rx.RxSchedulers;
+import com.kxjsj.doctorassistant.Rx.Utils.ProgressResponseBody;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import io.reactivex.Observable;
 
 /**
  * Created by vange on 2017/9/15.
@@ -94,4 +104,66 @@ public class FileUtils {
             {".wps", "application/vnd.ms-works"}, {".xml", "text/plain"},
             {".z", "application/x-compress"},
             {".zip", "application/x-zip-compressed"}, {"", "*/*"}};
+
+
+    /**
+     * 异步下载
+     *
+     * @param name
+     * @param progressResponseBody
+     * @param callBack
+     */
+    public static void saveFileAsync(String name, ProgressResponseBody progressResponseBody, CallBack callBack) {
+        Observable.just(progressResponseBody)
+                .compose(RxSchedulers.compose())
+                .map(responseBody -> FileUtils.saveFile(name, progressResponseBody))
+                .subscribe(file -> {
+                    callBack.onSuccess(file.getAbsolutePath());
+                });
+    }
+
+    public interface CallBack {
+
+        void onSuccess(String file);
+
+    }
+
+    /**
+     * 保存数据文件
+     *
+     * @param name
+     * @param responseBody
+     * @return
+     */
+    public static File saveFile(String name, ProgressResponseBody responseBody) {
+        InputStream is = responseBody.byteStream();
+        FileOutputStream fos = null;
+        File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + name);
+        if (!file.exists())
+            file.mkdirs();
+        byte[] buf = new byte[2048];
+        int len = 0;
+        try {
+            fos = new FileOutputStream(file);
+
+            while ((len = is.read(buf)) != -1) {
+                fos.write(buf, 0, len);
+            }
+            fos.flush();
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
+
 }

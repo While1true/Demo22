@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
 
 /**
- * Created by vange on 2017/9/12.
+ * 包装了toolbarde的activity
  */
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
@@ -18,8 +18,16 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         initView(savedInstanceState);
     }
 
+    /**
+     * onCreat下调用
+     * @param savedInstanceState
+     */
     protected abstract void initView(Bundle savedInstanceState);
 
+    /**
+     * 获取内容id
+     * @return
+     */
     protected abstract int getContentLayoutId();
 
     @Override

@@ -7,15 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.kxjsj.doctorassistant.R;
 import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
 
 /**
- * Created by vange on 2017/9/12.
+ *BaseFragment base
  */
 
 public abstract class BaseFragment extends Fragment {
@@ -55,6 +50,9 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    /**
+     * 懒加载
+     */
     protected abstract void loadLazy();
 
     @Override

@@ -90,6 +90,9 @@ public abstract class BaseTitleFragment extends Fragment {
         }
     }
 
+    /**
+     * 懒加载
+     */
     protected abstract void loadLazy();
 
     @Override

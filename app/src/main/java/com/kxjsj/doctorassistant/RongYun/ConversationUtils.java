@@ -2,13 +2,10 @@ package com.kxjsj.doctorassistant.RongYun;
 
 import android.content.Context;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Conversation;
 
 /**
  * Created by vange on 2017/9/19.

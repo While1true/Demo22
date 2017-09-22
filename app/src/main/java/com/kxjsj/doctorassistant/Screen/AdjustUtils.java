@@ -116,6 +116,16 @@ public class AdjustUtils {
      * @param context
      */
     private static void getSacleXY(Context context) {
+
+        //        //横屏
+//        if (point.x > point.y) {
+//            mScaleX = (point.x * 1.0f / DESIGN_HEIGHT);
+//            mScaleY = (point.y * 1.0f / DESIGN_WIDTH);
+//        } else {//竖屏
+//            mScaleX = (point.x * 1.0f / DESIGN_WIDTH);
+//            mScaleY = (point.y * 1.0f / DESIGN_HEIGHT);
+//        }
+
             mScaleXPercentage = (point.x * 1.0f / Math.max(DESIGN_WIDTH,DESIGN_HEIGHT));
             mScaleYPercentage = (point.y * 1.0f / Math.min(DESIGN_WIDTH,DESIGN_HEIGHT));
 

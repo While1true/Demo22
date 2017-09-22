@@ -10,11 +10,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.kxjsj.doctorassistant.Constant.Constance;
-import com.xiaomi.mipush.sdk.MiPushClient;
 
-import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;

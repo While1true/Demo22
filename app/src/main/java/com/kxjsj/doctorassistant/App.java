@@ -3,18 +3,10 @@ package com.kxjsj.doctorassistant;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
-import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.RongYun.RongYunInitialUtils;
 import com.kxjsj.doctorassistant.Screen.AdjustUtils;
-
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
 
 /**

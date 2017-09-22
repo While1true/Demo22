@@ -2,6 +2,7 @@ package com.kxjsj.doctorassistant.Mipush;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.xiaomi.mipush.sdk.ErrorCode;

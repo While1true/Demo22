@@ -1,7 +1,6 @@
 package com.kxjsj.doctorassistant.Appxx;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -10,34 +9,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideOption;
-import com.bumptech.glide.request.RequestOptions;
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
-import com.kxjsj.doctorassistant.RongYun.ConversationListActivity;
 import com.kxjsj.doctorassistant.RongYun.ConversationUtils;
-import com.kxjsj.doctorassistant.RongYun.RongYunInitialUtils;
-import com.kxjsj.doctorassistant.Rx.BaseObserver;
 import com.kxjsj.doctorassistant.View.NoScrollViewPager;
-import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
-import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * Created by vange on 2017/9/19.
@@ -60,7 +43,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         ButterKnife.bind(this);
 
         tipTextView.setVisibility(View.VISIBLE);
-        tipTextView.setOnClickListener(v->ConversationUtils.openChartList(this));
+        tipTextView.setOnClickListener(v -> ConversationUtils.openChartList(this));
 
 
         sickbedF = new SickbedF();
@@ -117,7 +100,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         requestPermission();
         RongIM.getInstance().addUnReadMessageCountChangedObserver(i -> {
             tipTextView.setIndicate(i);
-        },Conversation.ConversationType.CHATROOM,Conversation.ConversationType.NONE,Conversation.ConversationType.SYSTEM,Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
+        }, Conversation.ConversationType.CHATROOM, Conversation.ConversationType.NONE, Conversation.ConversationType.SYSTEM, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
     }
 
     @Override
@@ -139,7 +122,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
             case R.id.rb_communicate:
                 setTitle(titles[2]);
                 vp.setCurrentItem(2, false);
-                RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE,"110","你好");
+                RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, "110", "你好");
                 break;
             case R.id.rb_mine:
                 setTitle(titles[3]);
@@ -149,7 +132,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         }
     }
 
-    private void requestPermission(){
+    private void requestPermission() {
         RxPermissions rxPermission = new RxPermissions(this);
         rxPermission
                 .requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -159,11 +142,10 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
                         Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.RECORD_AUDIO,
                         Manifest.permission.WAKE_LOCK,
-                        Manifest.permission.GET_TASKS,
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.RECEIVE_BOOT_COMPLETED,
                         Manifest.permission.MODIFY_AUDIO_SETTINGS
-                       )
+                )
                 .subscribe(permission -> {
                     if (permission.granted) {
                         // 用户已经同意该权限
@@ -179,6 +161,13 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
 
     @Override
     protected void onDestroy() {

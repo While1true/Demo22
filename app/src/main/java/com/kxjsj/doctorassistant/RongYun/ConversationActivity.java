@@ -1,20 +1,12 @@
 package com.kxjsj.doctorassistant.RongYun;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
-import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Locale;
 

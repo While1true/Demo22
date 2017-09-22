@@ -1,15 +1,12 @@
 package com.kxjsj.doctorassistant.RongYun;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.R;
 
-import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
-import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
 /**
