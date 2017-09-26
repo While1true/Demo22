@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kxjsj.doctorassistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 小米 配置开始 < -->
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE" />
+
+    <permission
+        android:name="com.kxjsj.doctorassistant.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.kxjsj.doctorassistant.permission.MIPUSH_RECEIVE" />
+    <!-- 小米 配置结束 < -->
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="com.kxjsj.doctorassistant.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -25,36 +34,35 @@
         </activity>
         <activity
             android:name=".Appxx.RadioActivity"
-            android:launchMode="singleInstance"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleInstance"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-
-        <!--//来自融云的推送消息 小米-->
+        <!-- //来自融云的推送消息 小米 -->
         <activity
             android:name=".RongYun.PushHandlerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="com.kxjsj.doctorassistant"
                     android:pathPrefix="/push_message"
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <!--聚合会话列表-->
+        <!-- 聚合会话列表 -->
         <activity
             android:name=".RongYun.SubConversationListActivtiy"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -66,7 +74,7 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <!--会话列表-->
+        <!-- 会话列表 -->
 
         <activity
             android:name=".RongYun.ConversationListActivity"
@@ -74,10 +82,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="com.kxjsj.doctorassistant"
                     android:pathPrefix="/conversationlist"
@@ -85,16 +94,18 @@
             </intent-filter>
         </activity>
 
-        <!--会话页面-->
+        <!-- 会话页面 -->
         <activity
-            android:name="com.kxjsj.doctorassistant.RongYun.ConversationActivity"
+            android:name=".RongYun.ConversationActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="com.kxjsj.doctorassistant"
                     android:pathPrefix="/conversation/"
@@ -117,7 +128,6 @@
             android:name="com.amap.api.v2.apikey"
             android:value="0cfd669501d357d3acf0784677e07981" />
 
-
         <!-- 小米 配置开始 < -->
         <service
             android:name="com.xiaomi.push.service.XMPushService"
@@ -129,20 +139,21 @@
         <service
             android:name="com.xiaomi.mipush.sdk.MessageHandleService"
             android:enabled="true" />
-        <!--注：此service必须在2.2.5版本以后（包括2.2.5版本）加入-->
+        <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
 
         <service
             android:name="com.xiaomi.push.service.XMJobService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!--注：此service必须在3.0.1版本以后（包括3.0.1版本）加入-->
+        <!-- 注：此service必须在3.0.1版本以后（包括3.0.1版本）加入 -->
 
         <receiver
             android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
@@ -153,9 +164,9 @@
                 <action android:name="com.xiaomi.push.PING_TIMER" />
             </intent-filter>
         </receiver>
-        <!--io.rong.push.platform.MiMessageReceiver-->
+        <!-- io.rong.push.platform.MiMessageReceiver -->
         <receiver
-            android:name=".Mipush.MiPushReceiver"
+            android:name=".Mi.MiPushReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
@@ -169,27 +180,35 @@
         </receiver>
 
 
-        <!--<receiver-->
-        <!--android:exported="true"-->
-        <!--android:name=".Mipush.MiPushReceiver">-->
-        <!--&lt;!&ndash;这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名&ndash;&gt;-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />-->
-        <!--</intent-filter>-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />-->
-        <!--</intent-filter>-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.xiaomi.mipush.ERROR" />-->
-        <!--</intent-filter>-->
-        <!--</receiver>-->
+
+        <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <provider android:name=".Mi.MyProvider"
+            android:authorities="com.kxjsj.doctorassistant.selfupdate.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!-- <receiver -->
+        <!-- android:exported="true" -->
+        <!-- android:name=".Mipush.MiPushReceiver"> -->
+        <!-- &lt;!&ndash;这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名&ndash;&gt; -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.xiaomi.mipush.ERROR" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
         <!-- 小米 配置结束 < -->
     </application>
-    <!-- 小米 配置开始 < -->
 
-    <permission
-        android:name="com.kxjsj.doctorassistant.permission.MIPUSH_RECEIVE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.kxjsj.doctorassistant.permission.MIPUSH_RECEIVE" />
-    <!-- 小米 配置结束 < -->
 </manifest>

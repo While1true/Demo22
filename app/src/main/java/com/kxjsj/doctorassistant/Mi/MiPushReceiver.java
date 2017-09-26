@@ -1,15 +1,12 @@
-package com.kxjsj.doctorassistant.Mipush;
+package com.kxjsj.doctorassistant.Mi;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.WindowManager;
 
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
-import com.xiaomi.mipush.sdk.MiPushMessage;
-import com.xiaomi.mipush.sdk.PushMessageReceiver;
 
 import java.util.List;
 
