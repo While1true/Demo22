@@ -24,12 +24,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_ext_voice_input.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_ext_emoji_item.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_ext_emoji_item.xml"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_dialog_popup_options_item.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_dialog_popup_options_item.xml"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_ext_emoji_item.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\debug\\res\\layout\\rc_ext_emoji_item.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rc_ac_albums.xml",

@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment {
         initView(savedInstanceState);
     }
 
-    protected abstract void initView(Bundle savedInstanceState);
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     /**
      * 内容布局id

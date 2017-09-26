@@ -11,7 +11,7 @@ import com.kxjsj.doctorassistant.Rx.BaseBean
  */
 
 class HospitalF : BaseFragment() {
-    override fun initView(savedInstanceState: Bundle) {}
+    override fun initView(savedInstanceState: Bundle?) {}
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main

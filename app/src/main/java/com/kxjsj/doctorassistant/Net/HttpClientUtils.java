@@ -14,6 +14,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -35,20 +36,25 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 
 /**
@@ -57,8 +63,8 @@ import javax.net.ssl.TrustManagerFactory;
 
 public class HttpClientUtils {
 
-    public static final int READ_TIMEOUT = 6000;
-    public static final int REQUST_TIMEOUT = 6000;
+    private static final int READ_TIMEOUT = 6000;
+    private static final int REQUST_TIMEOUT = 6000;
 
     /**
      * post请求
@@ -69,6 +75,20 @@ public class HttpClientUtils {
      */
     public static String post(String url, MyNameValue myNameValue) {
         return post(url, myNameValue, null);
+    }
+
+
+    /**
+     * 注册证书
+     */
+    public static void addkeyStore(InputStream... cers) {
+        try {
+            registKeyStore(HttpClientHolder.client, cers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (Constance.DEBUGTAG)
+                Log.i(Constance.DEBUG, "addkeyStore: "+e.getMessage());
+        }
     }
 
     /**
@@ -106,7 +126,7 @@ public class HttpClientUtils {
     }
 
     /**
-     * post请求
+     * get请求
      *
      * @param url
      * @param
@@ -117,7 +137,7 @@ public class HttpClientUtils {
     }
 
     /**
-     * post请求
+     * get请求
      *
      * @param url
      * @param
@@ -148,7 +168,7 @@ public class HttpClientUtils {
                 result = EntityUtils.toString(entity);
             }
             if (Constance.DEBUGTAG)
-                Log.i(Constance.DEBUG, "post: " + result);
+                Log.i(Constance.DEBUG, "get: " + result);
             return result;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -186,28 +206,35 @@ public class HttpClientUtils {
      * @param client   要设置证书的client
      * @param keystore 证书
      * @param
-     * @param port     443 80
+     * @param /        443 80
      * @throws Exception
      */
-    private void registKeyStore(HttpClient client, int port, InputStream... keystore) throws Exception {
+    private static void registKeyStore(HttpClient client, InputStream... keystore) throws Exception {
         java.security.KeyStore trustStore = java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType());
         CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-        trustStore.load(null);
-        for (int i = 0; i < keystore.length; i++) {
-            String certificateAlias = "server" + i;
-            trustStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(keystore[i]));
-            try {
-                if (keystore[i] != null)
-                    keystore[i].close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        trustStore.load(null,null);
+        if (keystore != null) {
+            for (int i = 0; i < keystore.length; i++) {
+                String certificateAlias = "server" + i;
+                trustStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(keystore[i]));
+                try {
+                    if (keystore[i] != null)
+                        keystore[i].close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        org.apache.http.conn.ssl.SSLSocketFactory socketFactory = new org.apache.http.conn.ssl.SSLSocketFactory(trustStore);
-        socketFactory.setHostnameVerifier(SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
-        //这个8446是和被访问端约定的端口，一般为443
-        org.apache.http.conn.scheme.Scheme sch = new org.apache.http.conn.scheme.Scheme("https", socketFactory, port);
+        /**
+         * 有证书加载证书，无证书信任所有
+         */
+        SSLSocketFactory socketFactory = keystore == null?new SSLSocketFactoryEx(trustStore):new SSLSocketFactory(trustStore);
+        socketFactory.setHostnameVerifier(keystore == null ? SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER : SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+        //和被访问端约定的端口，一般为443
+        org.apache.http.conn.scheme.Scheme sch = new org.apache.http.conn.scheme.Scheme("https", socketFactory, 443);
+        org.apache.http.conn.scheme.Scheme sch2 = new org.apache.http.conn.scheme.Scheme("http", PlainSocketFactory.getSocketFactory(), 80);
         client.getConnectionManager().getSchemeRegistry().register(sch);
+        client.getConnectionManager().getSchemeRegistry().register(sch2);
     }
 
     /**
@@ -323,8 +350,6 @@ public class HttpClientUtils {
             String fileFullName = filePathUrl.substring(filePathUrl.lastIndexOf(File.separatorChar) + 1);
 
             System.out.println("file length---->" + fileLength);
-
-            URLConnection con = url.openConnection();
 
             BufferedInputStream bin = new BufferedInputStream(httpURLConnection.getInputStream());
 
@@ -507,5 +532,75 @@ public class HttpClientUtils {
          */
         void multilProgress(int part, long current, long total) {
         }
+    }
+
+    static class SSLSocketFactoryEx extends SSLSocketFactory {
+
+
+
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+
+
+
+        public SSLSocketFactoryEx(KeyStore truststore)
+
+                throws NoSuchAlgorithmException, KeyManagementException,
+
+                KeyStoreException, UnrecoverableKeyException {
+
+            super(truststore);
+
+
+
+            TrustManager tm = new X509TrustManager() {
+
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {return null;}
+
+
+
+                @Override
+
+                public void checkClientTrusted(
+
+                        java.security.cert.X509Certificate[] chain, String authType)
+
+                        throws java.security.cert.CertificateException {}
+
+
+
+                @Override
+
+                public void checkServerTrusted(
+
+                        java.security.cert.X509Certificate[] chain, String authType)
+
+                        throws java.security.cert.CertificateException {}
+
+            };
+
+            sslContext.init(null, new TrustManager[] { tm }, null);
+
+        }
+
+
+
+        @Override
+
+        public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException, UnknownHostException {
+
+            return sslContext.getSocketFactory().createSocket(socket, host, port,autoClose);
+
+        }
+
+
+
+        @Override
+
+        public Socket createSocket() throws IOException {
+
+            return sslContext.getSocketFactory().createSocket();
+
+        }
+
     }
 }

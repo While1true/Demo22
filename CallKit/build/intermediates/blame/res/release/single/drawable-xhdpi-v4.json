@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_voip_disable_camera_hover.png",
-        "source": "D:\\demo\\DoctorAssitant\\CallKit\\src\\main\\res\\drawable-xhdpi\\rc_voip_disable_camera_hover.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f609.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f609.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_voip_disable_camera_hover.png",
+        "source": "D:\\demo\\DoctorAssitant\\CallKit\\src\\main\\res\\drawable-xhdpi\\rc_voip_disable_camera_hover.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f44a.png",
@@ -96,12 +96,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_audio_toggle.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f631.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f631.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_grid_image_default.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_grid_image_default.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f631.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f631.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_voip_phone.png",
@@ -124,12 +124,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f62b.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_ext_indicator_hover.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ext_indicator_hover.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f332.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f332.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_ext_indicator_hover.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ext_indicator_hover.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_cs_group_ok_pressed.png",
@@ -224,12 +224,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f382.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_fr_file_list_ad_icon_folder.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_fr_file_list_ad_icon_folder.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_cs_group_check.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_cs_group_check.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_fr_file_list_ad_icon_folder.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_fr_file_list_ad_icon_folder.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f319.png",
@@ -252,12 +252,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ic_volume_0.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f436.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f436.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_read_receipt_request_hover.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_read_receipt_request_hover.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f436.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f436.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_cs_group_ok_disabled.png",
@@ -268,12 +268,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f622.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_conversation_list_msg_send_failure.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_conversation_list_msg_send_failure.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_cs_leave_message_bg_hover.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_cs_leave_message_bg_hover.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_conversation_list_msg_send_failure.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_conversation_list_msg_send_failure.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_keyboard_hover.png",
@@ -328,12 +328,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ext_location_tip.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_ext_plugin_toggle_hover.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ext_plugin_toggle_hover.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ic_setting_friends_add.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_notification_connecting.png",
@@ -364,12 +364,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_ic_volume_1.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f525.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f525.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_default_group_portrait.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_default_group_portrait.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f525.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f525.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f61d.png",
@@ -588,12 +588,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_cs_back_press.9.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f618.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f618.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f48a.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f48a.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f618.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f618.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u26a1.png",
@@ -732,12 +732,12 @@
         "source": "D:\\demo\\DoctorAssitant\\CallKit\\src\\main\\res\\drawable-xhdpi\\rc_voip_icon_input_video.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_rt_location_bar.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_rt_location_bar.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f393.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\u1f393.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_rt_location_bar.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\rc_rt_location_bar.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_picsel_pictype_normal.png",

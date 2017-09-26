@@ -4,16 +4,16 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_unread_msg_bg_style.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_item_top_list_selector.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_item_top_list_selector.xml"
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_voice_toggle_selector.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_voice_toggle_selector.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_notification_connecting_animated.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_notification_connecting_animated.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_voice_toggle_selector.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_voice_toggle_selector.xml"
+        "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_item_top_list_selector.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\bundles\\default\\res\\drawable\\rc_item_top_list_selector.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\CallKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_corner_voice_style.xml",

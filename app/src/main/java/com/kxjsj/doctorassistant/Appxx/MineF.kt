@@ -10,7 +10,7 @@ import com.kxjsj.doctorassistant.R
  */
 
 class MineF : BaseFragment() {
-    override fun initView(savedInstanceState: Bundle) {
+    override fun initView(savedInstanceState: Bundle?) {
 
     }
 

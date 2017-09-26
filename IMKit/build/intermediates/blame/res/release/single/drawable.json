@@ -36,12 +36,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_cs_corner_single_check_style.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_corner_style.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_corner_style.xml"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_unread_msg_bg_style.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_unread_msg_bg_style.xml"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_corner_style.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_corner_style.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable\\rc_cs_leave_message_btn.xml",
