@@ -7,7 +7,6 @@ import android.support.multidex.MultiDex;
 import com.bumptech.glide.Glide;
 import com.kxjsj.doctorassistant.RongYun.RongYunInitialUtils;
 import com.kxjsj.doctorassistant.Screen.AdjustUtil;
-import com.kxjsj.doctorassistant.Screen.AdjustUtils;
 
 
 /**

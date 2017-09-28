@@ -25,35 +25,40 @@ public abstract class BaseTitleFragment extends Fragment {
     private ImageView iv_menu;
     protected View view;
 
-    protected boolean viewCreated=false;
-    protected boolean firstLoad=true;
+    protected boolean viewCreated = false;
+    protected boolean firstLoad = true;
     protected IndicateImageView tipTextView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(getLayoutId(), container,false);
+        if (view == null)
+            view = inflater.inflate(getLayoutId(), container, false);
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        LinearLayout content=view.findViewById(R.id.root);
-        toolbar=view.findViewById(R.id.toolbar);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(toolbar!=null)
+            return;
+        LinearLayout content = view.findViewById(R.id.root);
+        toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         tv_title = view.findViewById(R.id.title);
         iv_menu = view.findViewById(R.id.menu);
         tipTextView = view.findViewById(R.id.message);
         toolbar.setNavigationOnClickListener(view1 -> onNavigationClicked());
-        getLayoutInflater(savedInstanceState).inflate(getLayoutId(),content,true);
+        getLayoutInflater().inflate(getLayoutId(), content, true);
         initView(savedInstanceState);
     }
 
     /**
      * 设置标题
+     *
      * @return
      */
-    public void setTitle(CharSequence title){
+    public void setTitle(CharSequence title) {
         tv_title.setText(title);
     }
 
@@ -61,21 +66,30 @@ public abstract class BaseTitleFragment extends Fragment {
      * 返回按钮
      */
     protected abstract void onNavigationClicked();
+
+    /**
+     * 初始化组件
+     *
+     * @param savedInstanceState
+     */
     protected abstract void initView(Bundle savedInstanceState);
 
     /**
      * 内容布局id
+     *
      * @return
      */
     protected abstract int getLayoutId();
+
     /**
      * 右上角菜单
+     *
      * @param resId
      * @param listener
      */
-    protected void setMenu(int resId, View.OnClickListener listener){
+    protected void setMenu(int resId, View.OnClickListener listener) {
         iv_menu.setVisibility(View.VISIBLE);
-        if(resId!=0)
+        if (resId != 0)
             iv_menu.setImageResource(resId);
         iv_menu.setOnClickListener(listener);
     }
@@ -84,8 +98,8 @@ public abstract class BaseTitleFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && viewCreated &&firstLoad){
-            firstLoad=false;
+        if (isVisibleToUser && viewCreated && firstLoad) {
+            firstLoad = false;
             loadLazy();
         }
     }
@@ -98,6 +112,9 @@ public abstract class BaseTitleFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        view=null;
+        tv_title=null;
+        iv_menu=null;
         RxLifeUtils.getInstance().remove(this);
     }
 }

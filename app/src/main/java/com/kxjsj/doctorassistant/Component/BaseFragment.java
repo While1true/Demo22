@@ -7,36 +7,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
 
 /**
- *BaseFragment base
+ * BaseFragment base
  */
 
 public abstract class BaseFragment extends Fragment {
     protected Toolbar toolbar;
     protected View view;
-    protected boolean viewCreated=false;
-    protected boolean firstLoad=true;
+    protected boolean viewCreated = false;
+    protected boolean firstLoad = true;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(getLayoutId(), container,false);
+        if (view == null)
+            view = inflater.inflate(getLayoutId(), container, false);
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewCreated=true;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView(savedInstanceState);
+        viewCreated = true;
     }
 
+
+    /**
+     * 初始化组件
+     *
+     * @param savedInstanceState
+     */
     protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     /**
      * 内容布局id
+     *
      * @return
      */
     protected abstract int getLayoutId();
@@ -44,8 +53,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && viewCreated &&firstLoad){
-            firstLoad=false;
+        if (isVisibleToUser && viewCreated && firstLoad) {
+            firstLoad = false;
             loadLazy();
         }
     }
@@ -55,9 +64,12 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void loadLazy();
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        view=null;
+        toolbar=null;
         RxLifeUtils.getInstance().remove(this);
     }
 }

@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
 import com.kxjsj.doctorassistant.RongYun.ConversationUtils;
 import com.kxjsj.doctorassistant.Utils.K2JUtils;
+import com.kxjsj.doctorassistant.Utils.MyToast;
 import com.kxjsj.doctorassistant.View.NoScrollViewPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -47,54 +49,28 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     @Override
     protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this);
-
         tipTextView.setVisibility(View.VISIBLE);
         tipTextView.setOnClickListener(v -> ConversationUtils.openChartList(this));
         if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG, "initView: ------");
+            Log.i(Constance.DEBUG, "initView: ------"+(savedInstanceState == null));
         if (savedInstanceState == null) {
-            sickbedF = new SickbedF();
-            sickbedF.setRetainInstance(true);
-            communicateF = new CommunicateF();
-            communicateF.setRetainInstance(true);
-
-            hospitalF = new HospitalF();
-            hospitalF.setRetainInstance(true);
-
-            mineF = new MineF();
-            mineF.setRetainInstance(true);
-
-            RongIM.connect("R3MgS7AhFNxrhpDztEpoplFxw0DW8w3nZrGY+2LJ4XXkSJIiJ+BLdqkUWbaMjOQlxaJYgGxwsjlPZAoHyx/J+w==", new RongIMClient.ConnectCallback() {
-                @Override
-                public void onTokenIncorrect() {
-                    if (Constance.DEBUGTAG)
-                        Log.i(Constance.DEBUG, "onTokenIncorrect: ");
-                }
-
-                @Override
-                public void onSuccess(String s) {
-                    if (Constance.DEBUGTAG)
-                        Log.i(Constance.DEBUG, "onSuccess: ");
-                }
-
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-                    if (Constance.DEBUGTAG)
-                        Log.i(Constance.DEBUG, "onError: ");
-                }
-            });
+            initial();
 
         } else {
-            sickbedF = (SickbedF) getSupportFragmentManager().getFragment(savedInstanceState, "sickbedF");
-            communicateF = (CommunicateF) getSupportFragmentManager().getFragment(savedInstanceState, "communicateF");
-            hospitalF = (HospitalF) getSupportFragmentManager().getFragment(savedInstanceState, "hospitalF");
-            mineF = (MineF) getSupportFragmentManager().getFragment(savedInstanceState, "mineF");
-            checkedID = savedInstanceState.getInt("checkedID");
+            resumeFragment(savedInstanceState);
         }
 
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer = i ->
+                        tipTextView.setIndicate(i)
+                , Conversation.ConversationType.CHATROOM,
+                Conversation.ConversationType.NONE,
+                Conversation.ConversationType.SYSTEM,
+                Conversation.ConversationType.PRIVATE,
+                Conversation.ConversationType.GROUP);
 
         rgGroup.setOnCheckedChangeListener(this);
         rgGroup.check(checkedID);
+        vp.setOffscreenPageLimit(4);
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -118,17 +94,60 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
 
         });
 
+    }
+
+    /**
+     * 获取保存的fragment
+     * @param savedInstanceState
+     */
+    private void resumeFragment(Bundle savedInstanceState) {
+        sickbedF = (SickbedF) getSupportFragmentManager().getFragment(savedInstanceState, "sickbedF");
+        communicateF = (CommunicateF) getSupportFragmentManager().getFragment(savedInstanceState, "communicateF");
+        hospitalF = (HospitalF) getSupportFragmentManager().getFragment(savedInstanceState, "hospitalF");
+        mineF = (MineF) getSupportFragmentManager().getFragment(savedInstanceState, "mineF");
+        checkedID = savedInstanceState.getInt("checkedID");
+    }
+
+    /**
+     * 初始化
+     */
+    private void initial() {
+        sickbedF = new SickbedF();
+        sickbedF.setRetainInstance(true);
+
+        communicateF = new CommunicateF();
+        communicateF.setRetainInstance(true);
+
+        hospitalF = new HospitalF();
+        hospitalF.setRetainInstance(true);
+
+        mineF = new MineF();
+        mineF.setRetainInstance(true);
+
         /**
          * 请求权限
          */
         requestPermission();
-        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer = i ->
-                        tipTextView.setIndicate(i)
-                , Conversation.ConversationType.CHATROOM,
-                Conversation.ConversationType.NONE,
-                Conversation.ConversationType.SYSTEM,
-                Conversation.ConversationType.PRIVATE,
-                Conversation.ConversationType.GROUP);
+
+        RongIM.connect("R3MgS7AhFNxrhpDztEpoplFxw0DW8w3nZrGY+2LJ4XXkSJIiJ+BLdqkUWbaMjOQlxaJYgGxwsjlPZAoHyx/J+w==", new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                if (Constance.DEBUGTAG)
+                    Log.i(Constance.DEBUG, "onTokenIncorrect: ");
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                if (Constance.DEBUGTAG)
+                    Log.i(Constance.DEBUG, "onSuccess: ");
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                if (Constance.DEBUGTAG)
+                    Log.i(Constance.DEBUG, "onError: ");
+            }
+        });
     }
 
     @Override
@@ -219,11 +238,18 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     }
 
     @Override
+    protected void onNavigationClicked() {
+        onBackPressed();
+    }
+
+    @Override
     protected void onDestroy() {
         vp.setAdapter(null);
+        vp=null;
         rgGroup.setOnCheckedChangeListener(null);
+        rgGroup=null;
         RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
         super.onDestroy();
-
+        MyToast.Companion.cancel();
     }
 }

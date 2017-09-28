@@ -182,13 +182,12 @@ public abstract class BaseAdapterRecord<T, E> extends RecyclerView.Adapter imple
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            GridLayoutManager manager = (GridLayoutManager) layoutManager;
-            final int spanCount = manager.getSpanCount();
+         final GridLayoutManager manager = (GridLayoutManager) layoutManager;
             manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
                     int itemViewType = getItemViewType(position);
-                    return setIfGridLayoutManagerSpan(itemViewType,position,spanCount) ;
+                    return setIfGridLayoutManagerSpan(itemViewType,position,manager.getSpanCount()) ;
                 }
             });
         }
