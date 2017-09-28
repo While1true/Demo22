@@ -25,7 +25,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,16 +34,15 @@
         </activity>
         <activity
             android:name=".Appxx.RadioActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation"
             android:launchMode="singleInstance"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <!-- //来自融云的推送消息 小米 -->
         <activity
             android:name=".RongYun.PushHandlerActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:configChanges="orientation"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -59,9 +58,8 @@
         <!-- 聚合会话列表 -->
         <activity
             android:name=".RongYun.SubConversationListActivtiy"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -78,9 +76,8 @@
 
         <activity
             android:name=".RongYun.ConversationListActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -97,9 +94,8 @@
         <!-- 会话页面 -->
         <activity
             android:name=".RongYun.ConversationActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

@@ -1,9 +1,12 @@
 package com.kxjsj.doctorassistant.Appxx;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +16,14 @@ import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
 import com.kxjsj.doctorassistant.RongYun.ConversationUtils;
+import com.kxjsj.doctorassistant.Utils.K2JUtils;
 import com.kxjsj.doctorassistant.View.NoScrollViewPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
@@ -35,8 +40,9 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     private CommunicateF communicateF;
     private HospitalF hospitalF;
     private MineF mineF;
-
-    String[] titles = {"病床管理", "医护监控", "医患交流", "我的"};
+    private IUnReadMessageObserver observer;
+    private int checkedID = R.id.rb_sickbed;
+    private String[] titles = {"病床管理", "医护监控", "医患交流", "我的"};
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -44,33 +50,51 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
 
         tipTextView.setVisibility(View.VISIBLE);
         tipTextView.setOnClickListener(v -> ConversationUtils.openChartList(this));
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG, "initView: ------");
+        if (savedInstanceState == null) {
+            sickbedF = new SickbedF();
+            sickbedF.setRetainInstance(true);
+            communicateF = new CommunicateF();
+            communicateF.setRetainInstance(true);
+
+            hospitalF = new HospitalF();
+            hospitalF.setRetainInstance(true);
+
+            mineF = new MineF();
+            mineF.setRetainInstance(true);
+
+            RongIM.connect("R3MgS7AhFNxrhpDztEpoplFxw0DW8w3nZrGY+2LJ4XXkSJIiJ+BLdqkUWbaMjOQlxaJYgGxwsjlPZAoHyx/J+w==", new RongIMClient.ConnectCallback() {
+                @Override
+                public void onTokenIncorrect() {
+                    if (Constance.DEBUGTAG)
+                        Log.i(Constance.DEBUG, "onTokenIncorrect: ");
+                }
+
+                @Override
+                public void onSuccess(String s) {
+                    if (Constance.DEBUGTAG)
+                        Log.i(Constance.DEBUG, "onSuccess: ");
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    if (Constance.DEBUGTAG)
+                        Log.i(Constance.DEBUG, "onError: ");
+                }
+            });
+
+        } else {
+            sickbedF = (SickbedF) getSupportFragmentManager().getFragment(savedInstanceState, "sickbedF");
+            communicateF = (CommunicateF) getSupportFragmentManager().getFragment(savedInstanceState, "communicateF");
+            hospitalF = (HospitalF) getSupportFragmentManager().getFragment(savedInstanceState, "hospitalF");
+            mineF = (MineF) getSupportFragmentManager().getFragment(savedInstanceState, "mineF");
+            checkedID = savedInstanceState.getInt("checkedID");
+        }
 
 
-        sickbedF = new SickbedF();
-        communicateF = new CommunicateF();
-        hospitalF = new HospitalF();
-        mineF = new MineF();
-        RongIM.connect("R3MgS7AhFNxrhpDztEpoplFxw0DW8w3nZrGY+2LJ4XXkSJIiJ+BLdqkUWbaMjOQlxaJYgGxwsjlPZAoHyx/J+w==", new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
-                if (Constance.DEBUGTAG)
-                    Log.i(Constance.DEBUG, "onTokenIncorrect: ");
-            }
-
-            @Override
-            public void onSuccess(String s) {
-                if (Constance.DEBUGTAG)
-                    Log.i(Constance.DEBUG, "onSuccess: ");
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                if (Constance.DEBUGTAG)
-                    Log.i(Constance.DEBUG, "onError: ");
-            }
-        });
         rgGroup.setOnCheckedChangeListener(this);
-        rgGroup.check(R.id.rb_sickbed);
+        rgGroup.check(checkedID);
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -98,9 +122,13 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
          * 请求权限
          */
         requestPermission();
-        RongIM.getInstance().addUnReadMessageCountChangedObserver(i -> {
-            tipTextView.setIndicate(i);
-        }, Conversation.ConversationType.CHATROOM, Conversation.ConversationType.NONE, Conversation.ConversationType.SYSTEM, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer = i ->
+                        tipTextView.setIndicate(i)
+                , Conversation.ConversationType.CHATROOM,
+                Conversation.ConversationType.NONE,
+                Conversation.ConversationType.SYSTEM,
+                Conversation.ConversationType.PRIVATE,
+                Conversation.ConversationType.GROUP);
     }
 
     @Override
@@ -122,12 +150,10 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
             case R.id.rb_communicate:
                 setTitle(titles[2]);
                 vp.setCurrentItem(2, false);
-                RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, "110", "你好");
                 break;
             case R.id.rb_mine:
                 setTitle(titles[3]);
                 vp.setCurrentItem(3, false);
-                RongIM.getInstance().startConversationList(this);
                 break;
         }
     }
@@ -137,14 +163,7 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         rxPermission
                 .requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.INTERNET,
-                        Manifest.permission.ACCESS_NETWORK_STATE,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.RECORD_AUDIO,
-                        Manifest.permission.WAKE_LOCK,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.RECEIVE_BOOT_COMPLETED,
-                        Manifest.permission.MODIFY_AUDIO_SETTINGS
+                        Manifest.permission.ACCESS_NETWORK_STATE
                 )
                 .subscribe(permission -> {
                     if (permission.granted) {
@@ -168,10 +187,43 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putInt("checkedID", checkedID);
+        getSupportFragmentManager().putFragment(outState, "sickbedF", sickbedF);
+        getSupportFragmentManager().putFragment(outState, "hospitalF", hospitalF);
+        getSupportFragmentManager().putFragment(outState, "communicateF", communicateF);
+        getSupportFragmentManager().putFragment(outState, "mineF", mineF);
+    }
+
+    private long lastClick;
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        final boolean isStateSaved = fragmentManager.isStateSaved();
+        if (isStateSaved && Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
+            // Older versions will throw an exception from the framework
+            return;
+        }
+        if (isStateSaved || !fragmentManager.popBackStackImmediate()) {
+            if (System.currentTimeMillis() - lastClick < 300) {
+                finish();
+                RongIM.getInstance().disconnect();
+            } else {
+                lastClick = System.currentTimeMillis();
+                K2JUtils.toast("再次点击退出", 1);
+            }
+        }
+
+    }
 
     @Override
     protected void onDestroy() {
+        vp.setAdapter(null);
+        rgGroup.setOnCheckedChangeListener(null);
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
         super.onDestroy();
-        RongIM.getInstance().disconnect();
+
     }
 }

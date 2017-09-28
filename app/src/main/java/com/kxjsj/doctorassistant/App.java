@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.bumptech.glide.Glide;
 import com.kxjsj.doctorassistant.RongYun.RongYunInitialUtils;
+import com.kxjsj.doctorassistant.Screen.AdjustUtil;
 import com.kxjsj.doctorassistant.Screen.AdjustUtils;
 
 
@@ -13,6 +14,7 @@ import com.kxjsj.doctorassistant.Screen.AdjustUtils;
  * Created by vange on 2017/9/6.
  */
 public class App extends Application {
+    public static App app;
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -23,10 +25,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        app=this;
 
         new Thread(() -> init()).start();
 
-        AdjustUtils.Adjust(this, AdjustUtils.TYPE_DP);
+        AdjustUtil.adjust(this);
 
 
     }

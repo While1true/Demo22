@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by vange on 2017/9/19.
@@ -20,7 +21,8 @@ public class ConversationUtils {
      * @param title
      */
     public static void startChartSingle(Context context, String RongUseId, String title) {
-        RongIM.getInstance().startPrivateChat(context, RongUseId, title);
+        RongIM.getInstance().startConversation(context,
+                Conversation.ConversationType.PRIVATE, RongUseId, title);
     }
 
     public static void openChartList(Context context) {

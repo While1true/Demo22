@@ -1,20 +1,20 @@
 package com.kxjsj.doctorassistant.Appxx;
 
 import android.os.Bundle;
-import android.view.View;
+import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.kxjsj.doctorassistant.Component.BaseFragment;
+import com.kxjsj.doctorassistant.JavaBean.KotlinBean;
 import com.kxjsj.doctorassistant.R;
-import com.kxjsj.doctorassistant.Utils.MyToast;
 
 /**
- * Created by vange on 2017/9/19.
+ * Created by vange on 2017/9/28.
  */
 
-public class SickbedF extends BaseFragment {
+public class HospitalF extends BaseFragment {
     @Override
-    protected void initView(Bundle savedInstanceState) {
-        view.findViewById(R.id.ccc).setOnClickListener(view -> MyToast.Companion.showToasteLong("sdsshjjjjjjjjjjjjjjjjjjjj", 1));
+    protected void initView(@Nullable Bundle savedInstanceState) {
     }
 
     @Override
@@ -26,5 +26,4 @@ public class SickbedF extends BaseFragment {
     protected void loadLazy() {
 
     }
-
 }

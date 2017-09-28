@@ -10,8 +10,10 @@ import com.kxjsj.doctorassistant.Appxx.RadioActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.Net.HttpClientUtils;
 import com.kxjsj.doctorassistant.Rx.MyObserver;
+import com.kxjsj.doctorassistant.Utils.MyToast;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -24,14 +26,21 @@ public class MainActivity extends AppCompatActivity {
         Observable.just(1)
               .observeOn(Schedulers.io())
               .map(integer -> {
-                    String url="https://www.baidu.com/baidu?tn=monline_3_dg&ie=utf-8&wd=%E8%8B%B9%E6%9E%9C";
+                    String url="https://github.com/";
                     String s = HttpClientUtils.get(url, null);
                     if (Constance.DEBUGTAG)
                         Log.i(Constance.DEBUG, "mainzzzzz: "+s);
-                    return integer.toString();
+                    return s;
               })
+                .observeOn(AndroidSchedulers.mainThread())
               .subscribe(new MyObserver<String>("aa") {
-            @Override
+                  @Override
+                  public void onNext(String s) {
+                      super.onNext(s);
+                      MyToast.Companion.showToasteLong(s,1);
+                  }
+
+                  @Override
             public void onError(Throwable e) {
                 super.onError(e);
                 Log.e("mainzzzzz: ", "onError: ",e );
@@ -39,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         startActivity(new Intent(this, RadioActivity.class));
+        overridePendingTransition(0,0);
         finish();
+
     }
 }
