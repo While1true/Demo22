@@ -2,7 +2,6 @@ package com.kxjsj.doctorassistant.Appxx;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 
@@ -81,35 +80,32 @@ public class SickbedF extends BaseFragment {
 
         manager = new GridLayoutManager(getContext(), spancount);
         baseMutilAdapter = new SBaseMutilAdapter(list)
-                .addType(R.layout.sickbed_item_title, new SBaseMutilAdapter.ITEMHOLDER() {
+                .addType(R.layout.sickbed_item_title, new SBaseMutilAdapter.ITEMHOLDER<KotlinBean.SickBedBean>() {
 
                     @Override
-                    public void onBind(SimpleViewHolder holder, Object item, int position) {
-                        KotlinBean.SickBedBean bean = (KotlinBean.SickBedBean) item;
-                        holder.setText(R.id.title, bean.getTitle());
+                    public void onBind(SimpleViewHolder holder, KotlinBean.SickBedBean item, int position) {
+                        holder.setText(R.id.title, item.getTitle());
                     }
 
                     @Override
-                    public boolean istype(Object item, int position) {
-                        KotlinBean.SickBedBean bean = (KotlinBean.SickBedBean) item;
-                        return bean.getType() == 0;
+                    public boolean istype(KotlinBean.SickBedBean item, int position) {
+                        return item.getType() == 0;
                     }
 
                     @Override
-                    protected int gridSpanSize(Object item, int position) {
+                    protected int gridSpanSize(KotlinBean.SickBedBean item, int position) {
                         return manager.getSpanCount();
                     }
-                }).addType(R.layout.sickbed_item_bed, new SBaseMutilAdapter.ITEMHOLDER() {
+                }).addType(R.layout.sickbed_item_bed, new SBaseMutilAdapter.ITEMHOLDER<KotlinBean.SickBedBean>() {
                     @Override
-                    public void onBind(SimpleViewHolder holder, Object item, int position) {
-                        KotlinBean.SickBedBean bean = (KotlinBean.SickBedBean) item;
-                        holder.setText(R.id.textView, bean.getName());
+                    public void onBind(SimpleViewHolder holder, KotlinBean.SickBedBean item, int position) {
+                        holder.itemView.setOnClickListener(view -> K2JUtils.toast(item.getName(),1));
+                        holder.setText(R.id.textView, item.getName());
                     }
 
                     @Override
-                    public boolean istype(Object item, int position) {
-                        KotlinBean.SickBedBean bean = (KotlinBean.SickBedBean) item;
-                        return bean.getType() == 1;
+                    public boolean istype(KotlinBean.SickBedBean item, int position) {
+                        return item.getType() == 1;
                     }
                 }).setStateListener(new DefaultStateListener() {
                     @Override
@@ -125,7 +121,7 @@ public class SickbedF extends BaseFragment {
                         srecyclerview.postDelayed(() -> {
                             baseMutilAdapter.showState(SBaseMutilAdapter.SHOW_NOMORE, "无更多内容了");
                             srecyclerview.notifyRefreshComplete();
-                        }, 3000);
+                        }, 1000);
 
                     }
                 }).setRefreshing();
@@ -141,7 +137,7 @@ public class SickbedF extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.sickbed_layout;
+        return R.layout.srecyclerview;
     }
 
     @Override

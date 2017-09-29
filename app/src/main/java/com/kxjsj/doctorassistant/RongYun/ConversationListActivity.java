@@ -2,8 +2,10 @@ package com.kxjsj.doctorassistant.RongYun;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
+import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.R;
 
 import io.rong.imkit.fragment.ConversationListFragment;
@@ -46,5 +48,12 @@ public class ConversationListActivity extends BaseTitleActivity implements RongY
     @Override
     public void onSuccess(String userid) {
         enterFragment();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroy: ");
     }
 }

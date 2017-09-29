@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_doctor"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="0dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toLeftOf="@+id/guideline3" />
+
+    <TextView
+        android:id="@+id/introduction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:lineSpacingExtra="8dp"
+        android:text="    xx医生从事相关工作xx年，拥有丰富的经验，得到众多好评。经常参与慈善活动，用心做人做事，值得信赖！"
+        android:textColor="@color/navi_unchecked"
+        android:textSize="20sp"
+        android:maxLines="5"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <Button
+        android:id="@+id/communicate"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:text="点击咨询"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/introduction"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/help"
+        app:layout_constraintVertical_bias="0.33999997" />
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:text="以下问题可能帮到你？"
+        android:textColor="@color/navi_unchecked"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_doctor" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline3"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/ask"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="留言提问"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/communicate"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/help" />
+</android.support.constraint.ConstraintLayout>

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp"
-    tools:layout_editor_absoluteX="0dp">
+ >
 
     <RadioGroup
         android:id="@+id/rg_group"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:background="@color/background"
         android:divider="#666666"
         android:dividerPadding="2dp"
@@ -23,7 +22,7 @@
         app:layout_constraintRight_toRightOf="parent">
         <RadioButton
             android:id="@+id/rb_sickbed"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -39,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:button="@null"
             android:textSize="14sp"
             android:textColor="@drawable/radio_text_selector"
@@ -50,7 +49,7 @@
         <RadioButton
             android:id="@+id/rb_communicate"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:button="@null"
@@ -64,7 +63,7 @@
             android:id="@+id/rb_mine"
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:layout_weight="1"
             android:textColor="@drawable/radio_text_selector"
             android:button="@null"

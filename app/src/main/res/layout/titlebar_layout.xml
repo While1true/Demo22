@@ -9,7 +9,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Base.V7.Widget.AppCompat.Toolbar"
         android:background="@color/colorPrimary"
         toolbar:navigationIcon="@drawable/ic_back"
         toolbar:titleTextColor="@color/titleColorWhite">
@@ -26,12 +27,12 @@
 
         <com.kxjsj.doctorassistant.View.IndicateImageView
             android:id="@+id/message"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:paddingRight="15dp"
             android:paddingLeft="15dp"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:layout_height="42dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="15dp"
             android:layout_gravity="right"
             android:scaleType="centerInside"
@@ -46,7 +47,8 @@
             android:layout_marginRight="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/ic_menu"
             android:visibility="gone" />
 

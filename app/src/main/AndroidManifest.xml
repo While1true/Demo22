@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +34,21 @@
         </activity>
         <activity
             android:name=".Appxx.RadioActivity"
-            android:configChanges="orientation"
-            android:launchMode="singleInstance"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".Appxx.Communicate.DoctorHome"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+
+
+
+
+
+
+
 
         <!-- //来自融云的推送消息 小米 -->
         <activity
@@ -58,7 +70,7 @@
         <!-- 聚合会话列表 -->
         <activity
             android:name=".RongYun.SubConversationListActivtiy"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -76,7 +88,7 @@
 
         <activity
             android:name=".RongYun.ConversationListActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -94,7 +106,7 @@
         <!-- 会话页面 -->
         <activity
             android:name=".RongYun.ConversationActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>

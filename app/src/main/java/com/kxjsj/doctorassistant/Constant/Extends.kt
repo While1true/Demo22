@@ -1,5 +1,6 @@
 import android.util.TypedValue
 import com.kxjsj.doctorassistant.App
+import com.kxjsj.doctorassistant.Utils.K2JUtils
 import com.kxjsj.doctorassistant.Utils.MyToast
 
 
@@ -46,4 +47,11 @@ fun Any?.dp2px(dp: Float): Int {
     return (0.5f + TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, dp,
             App.app.resources.displayMetrics)).toInt()
+}
+
+/**
+ * 打印log
+ */
+fun Any.log(charSequence: CharSequence){
+    K2JUtils.log(javaClass.simpleName,charSequence)
 }

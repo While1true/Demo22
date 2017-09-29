@@ -4,6 +4,10 @@ package com.kxjsj.doctorassistant.Utils;
  * Created by vange on 2017/9/28.
  */
 
+import android.util.Log;
+
+import com.kxjsj.doctorassistant.Constant.Constance;
+
 /**
  * kotlin项目使用，小范围使用学习
  */
@@ -33,5 +37,15 @@ public class K2JUtils {
      */
     public static void toast(CharSequence charSequence,int during){
         MyToast.Companion.showToaste(charSequence,during);
+    }
+
+    /**
+     * 给kotlin调用log
+     * @param descripte
+     * @param message
+     */
+    public static void log(String descripte,CharSequence message){
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + descripte + "--", "log: "+message);
     }
 }

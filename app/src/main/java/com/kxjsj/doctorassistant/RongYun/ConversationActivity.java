@@ -41,6 +41,9 @@ public class ConversationActivity extends BaseTitleActivity implements RongYunIn
         Intent intent = getIntent();
 
         getIntentDate(intent);
+
+        RongYunInitialUtils.isReconnect(this,"9nAvAzspHZGaiOA6rHi9ar3H8LGDW6Uc/HBclMSvZCFle5Xi81v0ZOnVeCXbGGmnoV4CtMgswymwuYXE7/3U6Q==",this);
+
     }
     /**
      * 展示如何从 Intent 中得到 融云会话页面传递的 Uri
@@ -64,7 +67,7 @@ public class ConversationActivity extends BaseTitleActivity implements RongYunIn
     private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId) {
 
         ConversationFragment fragment = (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
-
+        fragment.setRetainInstance(true);
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
                 .appendPath("conversation").appendPath(mConversationType.getName().toLowerCase())
                 .appendQueryParameter("targetId", mTargetId).build();
@@ -75,5 +78,10 @@ public class ConversationActivity extends BaseTitleActivity implements RongYunIn
     @Override
     public void onSuccess(String userid) {
         enterFragment(mConversationType, mTargetId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

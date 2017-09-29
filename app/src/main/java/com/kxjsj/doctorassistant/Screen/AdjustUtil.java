@@ -35,6 +35,7 @@ public class AdjustUtil {
     private static int DESIGN_HEIGHTs = 1200;
     private static float DESIGN_SCALEs = 2.0f;
     public static float screenScale = 0;
+    public static float originalScreenScale = 0;
 
     /**
      * 平板配置
@@ -57,7 +58,7 @@ public class AdjustUtil {
         DESIGN_WIDTHs = DESIGN_WIDTH;
         DESIGN_HEIGHTs = DESIGN_HEIGHT;
         DESIGN_SCALEs = DESIGN_SCALE;
-
+        originalScreenScale=app.getResources().getDisplayMetrics().density;
         doAdjust(app);
     }
 
@@ -82,10 +83,10 @@ public class AdjustUtil {
 
     /**
      * 改变density
-     *
+     *屏幕选注不重启activity时要在onConfigChanged中调用
      * @param context
      */
-    private static void changeTypeValue(Context context) {
+    public static void changeTypeValue(Context context) {
         if (type == Orention.BOTH) {
             /**
              * 和设计尺寸一样不调整

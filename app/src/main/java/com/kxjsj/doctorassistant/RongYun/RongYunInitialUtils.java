@@ -24,6 +24,8 @@ import io.rong.push.RongPushClient;
 
 public class RongYunInitialUtils {
     public static void init(Application application) {
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--"  + "--", "init: ----");
         /**
          * miAppId
          * miAppKey

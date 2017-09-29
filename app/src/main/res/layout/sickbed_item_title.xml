@@ -8,10 +8,8 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
         android:padding="15dp"
         android:text="第几楼几号病房"
         android:textSize="20sp"

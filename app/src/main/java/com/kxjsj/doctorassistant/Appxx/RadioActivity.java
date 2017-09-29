@@ -59,7 +59,6 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         } else {
             resumeFragment(savedInstanceState);
         }
-
         RongIM.getInstance().addUnReadMessageCountChangedObserver(observer = i ->
                         tipTextView.setIndicate(i)
                 , Conversation.ConversationType.CHATROOM,
