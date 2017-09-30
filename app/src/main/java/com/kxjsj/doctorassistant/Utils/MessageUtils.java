@@ -12,6 +12,7 @@ import cn.smssdk.SMSSDK;
 
 /**
  * Created by vange on 2017/9/30.
+ * Mob短信验证服务
  * 先在App中初始化
  * 在验证界面验证
  *
