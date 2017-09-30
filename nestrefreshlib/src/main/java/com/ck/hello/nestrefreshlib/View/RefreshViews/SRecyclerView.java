@@ -44,7 +44,6 @@ import com.ck.hello.nestrefreshlib.View.RefreshViews.HeadWrap.WrapInterface;
  * 出列快速滑动时的处理不是很完美，但能用
  * 控件不懂使用的参考我的简书页
  * **************  http://www.jianshu.com/u/07d24a532308  *******************
- *
  */
 
 public class SRecyclerView extends LinearLayout implements NestedScrollingParent, WrapInterface {
@@ -95,10 +94,9 @@ public class SRecyclerView extends LinearLayout implements NestedScrollingParent
         super.onDetachedFromWindow();
         if (animator != null) {
             animator.cancel();
-            animator = null;
         }
-        headerRefreshWrap.OnDetachFromWindow();
-        footerRefreshWrap.OnDetachFromWindow();
+//        headerRefreshWrap.OnDetachFromWindow();
+//        footerRefreshWrap.OnDetachFromWindow();
     }
 
     public LinearLayout getHeaderLayout() {

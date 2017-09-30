@@ -9,10 +9,10 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class MyObserver<T> implements Observer<T> {
     private static final String TAG = "MyObserver";
-    private String tag = null;
+    private Object tag = null;
     Disposable d;
 
-    protected MyObserver(String tag) {
+    protected MyObserver(Object tag) {
         this.tag = tag;
     }
 

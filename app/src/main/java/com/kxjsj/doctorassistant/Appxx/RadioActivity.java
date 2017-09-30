@@ -1,10 +1,12 @@
 package com.kxjsj.doctorassistant.Appxx;
 
 import android.Manifest;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,6 +26,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.Disposable;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
@@ -33,7 +36,7 @@ import io.rong.imlib.model.Conversation;
  * Created by vange on 2017/9/19.
  */
 
-public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnCheckedChangeListener {
+public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnCheckedChangeListener, IUnReadMessageObserver {
     @BindView(R.id.rg_group)
     RadioGroup rgGroup;
     @BindView(R.id.vp)
@@ -42,9 +45,9 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     private CommunicateF communicateF;
     private HospitalF hospitalF;
     private MineF mineF;
-    private IUnReadMessageObserver observer;
     private int checkedID = R.id.rb_sickbed;
     private String[] titles = {"病床管理", "医护监控", "医患交流", "我的"};
+    private Disposable subscribe;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -52,15 +55,10 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         tipTextView.setVisibility(View.VISIBLE);
         tipTextView.setOnClickListener(v -> ConversationUtils.openChartList(this));
         if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG, "initView: ------"+(savedInstanceState == null));
-        if (savedInstanceState == null) {
-            initial();
+            Log.i(Constance.DEBUG, "initView: ------" + (savedInstanceState == null));
+        initial(savedInstanceState);
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(this
 
-        } else {
-            resumeFragment(savedInstanceState);
-        }
-        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer = i ->
-                        tipTextView.setIndicate(i)
                 , Conversation.ConversationType.CHATROOM,
                 Conversation.ConversationType.NONE,
                 Conversation.ConversationType.SYSTEM,
@@ -96,32 +94,39 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     }
 
     /**
-     * 获取保存的fragment
-     * @param savedInstanceState
-     */
-    private void resumeFragment(Bundle savedInstanceState) {
-        sickbedF = (SickbedF) getSupportFragmentManager().getFragment(savedInstanceState, "sickbedF");
-        communicateF = (CommunicateF) getSupportFragmentManager().getFragment(savedInstanceState, "communicateF");
-        hospitalF = (HospitalF) getSupportFragmentManager().getFragment(savedInstanceState, "hospitalF");
-        mineF = (MineF) getSupportFragmentManager().getFragment(savedInstanceState, "mineF");
-        checkedID = savedInstanceState.getInt("checkedID");
-    }
-
-    /**
      * 初始化
      */
-    private void initial() {
-        sickbedF = new SickbedF();
-        sickbedF.setRetainInstance(true);
+    private void initial(Bundle bundle) {
+        if (bundle != null) {
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            sickbedF = (SickbedF) supportFragmentManager.getFragment(bundle, "sickbedF");
+            communicateF = (CommunicateF) supportFragmentManager.getFragment(bundle, "communicateF");
+            hospitalF = (HospitalF) supportFragmentManager.getFragment(bundle, "hospitalF");
+            mineF = (MineF) supportFragmentManager.getFragment(bundle, "mineF");
+        }
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "initial: " + (sickbedF == null));
+        if (sickbedF == null) {
+            sickbedF = new SickbedF();
+//            supportFragmentManager.beginTransaction().add(sickbedF,"sickbedF");
+        }
 
-        communicateF = new CommunicateF();
-        communicateF.setRetainInstance(true);
 
-        hospitalF = new HospitalF();
-        hospitalF.setRetainInstance(true);
+        if (communicateF == null) {
+            communicateF = new CommunicateF();
+//            supportFragmentManager.beginTransaction().add(communicateF,"CommunicateF");
+        }
 
-        mineF = new MineF();
-        mineF.setRetainInstance(true);
+        if (hospitalF == null) {
+            hospitalF = new HospitalF();
+//            supportFragmentManager.beginTransaction().add(hospitalF,"hospitalF");
+        }
+
+
+        if (mineF == null) {
+            mineF = new MineF();
+//            supportFragmentManager.beginTransaction().add(mineF,"mineF");
+        }
 
         /**
          * 请求权限
@@ -176,9 +181,12 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
         }
     }
 
+    /**
+     * 权限申请
+     */
     private void requestPermission() {
-        RxPermissions rxPermission = new RxPermissions(this);
-        rxPermission
+
+        subscribe = new RxPermissions(this)
                 .requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.INTERNET,
                         Manifest.permission.ACCESS_NETWORK_STATE
@@ -203,15 +211,6 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
     protected void onPause() {
         super.onPause();
 
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        outState.putInt("checkedID", checkedID);
-        getSupportFragmentManager().putFragment(outState, "sickbedF", sickbedF);
-        getSupportFragmentManager().putFragment(outState, "hospitalF", hospitalF);
-        getSupportFragmentManager().putFragment(outState, "communicateF", communicateF);
-        getSupportFragmentManager().putFragment(outState, "mineF", mineF);
     }
 
     private long lastClick;
@@ -243,12 +242,60 @@ public class RadioActivity extends BaseTitleActivity implements RadioGroup.OnChe
 
     @Override
     protected void onDestroy() {
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroy: ");
+        if (!subscribe.isDisposed())
+            subscribe.dispose();
+        subscribe = null;
         vp.setAdapter(null);
-        vp=null;
+        vp = null;
         rgGroup.setOnCheckedChangeListener(null);
-        rgGroup=null;
-        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
+        rgGroup = null;
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(this);
+        hospitalF = null;
+        sickbedF = null;
+        communicateF = null;
+        mineF = null;
         super.onDestroy();
+
         MyToast.Companion.cancel();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onCreate: ");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onRestoreInstanceState: ");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("checkedID", checkedID);
+        getSupportFragmentManager().putFragment(outState, "sickbedF", sickbedF);
+        getSupportFragmentManager().putFragment(outState, "hospitalF", hospitalF);
+        getSupportFragmentManager().putFragment(outState, "communicateF", communicateF);
+        getSupportFragmentManager().putFragment(outState, "mineF", mineF);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onSaveInstanceState: ");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onConfigurationChanged: ");
+    }
+
+    @Override
+    public void onCountChanged(int i) {
+        tipTextView.setIndicate(i);
     }
 }

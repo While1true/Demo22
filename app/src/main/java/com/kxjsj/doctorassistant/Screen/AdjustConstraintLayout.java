@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * @deprecated Advise to use @AdjustUtil
  * Created by hupihuai on 2017/8/9.
  * Adjust by 不听话好孩子 on 2017/9/12
  */

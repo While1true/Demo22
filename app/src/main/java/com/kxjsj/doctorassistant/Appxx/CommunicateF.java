@@ -42,8 +42,7 @@ public class CommunicateF extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "initView: srecyclerview:" + (srecyclerview == null));
+        setRetainInstance(true);
         /**
          * 销毁重建的不重新初始化
          */
@@ -54,7 +53,6 @@ public class CommunicateF extends BaseFragment {
              *
              */
             caculateSpanCount();
-            srecyclerview.addDefaultHeaderFooter();
             manager.setSpanCount(spancount);
             baseMutilAdapter.notifyDataSetChanged();
             return;
@@ -146,19 +144,5 @@ public class CommunicateF extends BaseFragment {
                     }
                 }).setRefreshing();
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroyView: ");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroy: ");
     }
 }

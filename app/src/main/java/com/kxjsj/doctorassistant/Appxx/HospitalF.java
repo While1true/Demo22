@@ -13,6 +13,7 @@ import com.kxjsj.doctorassistant.R;
 public class HospitalF extends BaseFragment {
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        setRetainInstance(true);
     }
 
     @Override

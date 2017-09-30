@@ -4,12 +4,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_ic_no_selector.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_cs_evaluate_selector.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_cs_evaluate_selector.xml"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_edit_text_background_selector.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_edit_text_background_selector.xml"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_cs_evaluate_selector.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_cs_evaluate_selector.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_ic_yes_selector.xml",
@@ -24,28 +24,28 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_white_bg_shape.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_cs_leave_message_btn.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_cs_leave_message_btn.xml"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_item_top_list_selector.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_item_top_list_selector.xml"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_cs_leave_message_btn.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_cs_leave_message_btn.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_unread_msg_bg_style.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_unread_msg_bg_style.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_selector_title_back_press.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_selector_title_back_press.xml"
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_corner_style.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_corner_style.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_an_voice_receive.xml",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_an_voice_receive.xml"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_corner_style.xml",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_corner_style.xml"
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_selector_title_back_press.xml",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable\\rc_selector_title_back_press.xml"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\debug\\drawable\\rc_ic_files_selector.xml",

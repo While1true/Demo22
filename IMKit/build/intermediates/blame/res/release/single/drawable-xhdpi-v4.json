@@ -56,12 +56,12 @@
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable-xhdpi\\u1f4aa.png"
     },
     {
-        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png",
-        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable-xhdpi\\rc_public_service_menu_bg.9.png"
-    },
-    {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_add_people.png",
         "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable-xhdpi\\rc_add_people.png"
+    },
+    {
+        "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\rc_public_service_menu_bg.9.png",
+        "source": "D:\\demo\\DoctorAssitant\\IMKit\\src\\main\\res\\drawable-xhdpi\\rc_public_service_menu_bg.9.png"
     },
     {
         "merged": "D:\\demo\\DoctorAssitant\\IMKit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\u1f64a.png",

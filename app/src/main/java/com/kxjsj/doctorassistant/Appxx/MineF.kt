@@ -11,7 +11,7 @@ import com.kxjsj.doctorassistant.R
 
 class MineF : BaseFragment() {
     override fun initView(savedInstanceState: Bundle?) {
-
+        retainInstance = true
     }
 
     override fun getLayoutId(): Int {

@@ -3,7 +3,7 @@
     android:id="@+id/rc_audio_input_toggle"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="32dp"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="12dp"
     android:layout_marginRight="10dp"
     android:background="@drawable/rc_voice_input_selector"

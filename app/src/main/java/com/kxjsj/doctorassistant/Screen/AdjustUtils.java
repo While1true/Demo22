@@ -21,6 +21,7 @@ import java.lang.reflect.Field;
 import static android.content.Context.WINDOW_SERVICE;
 
 /**
+ * @deprecated suggest to use @AdjustUtil instead
  * Adjust by 不听话好孩子 on 2017/9/12
  * 集众家之长的适配工具
  * TYPE_FONT 配合  ConstraintLayout addview 使用

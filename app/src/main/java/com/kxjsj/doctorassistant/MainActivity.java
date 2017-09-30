@@ -10,6 +10,7 @@ import com.kxjsj.doctorassistant.Appxx.RadioActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.Net.HttpClientUtils;
 import com.kxjsj.doctorassistant.Rx.MyObserver;
+import com.kxjsj.doctorassistant.Rx.RxLifeUtils;
 import com.kxjsj.doctorassistant.Utils.MyToast;
 
 import io.reactivex.Observable;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     return s;
               })
                 .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new MyObserver<String>("aa") {
+              .subscribe(new MyObserver<String>(this) {
                   @Override
                   public void onNext(String s) {
                       super.onNext(s);
@@ -51,5 +52,11 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
         finish();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxLifeUtils.getInstance().remove(this);
     }
 }

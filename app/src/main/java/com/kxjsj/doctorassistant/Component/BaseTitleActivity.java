@@ -89,6 +89,11 @@ public abstract class BaseTitleActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        toolbar.setNavigationOnClickListener(null);
+        toolbar=null;
+        tv_title=null;
+        iv_menu=null;
+        tipTextView=null;
         RxLifeUtils.getInstance().remove(this);
     }
 }

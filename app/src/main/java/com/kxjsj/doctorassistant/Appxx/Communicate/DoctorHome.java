@@ -3,12 +3,11 @@ package com.kxjsj.doctorassistant.Appxx.Communicate;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.InputType;
 import android.util.Log;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ck.hello.nestrefreshlib.View.Adpater.Base.SimpleViewHolder;
 import com.ck.hello.nestrefreshlib.View.Adpater.DefaultStateListener;
@@ -54,6 +53,8 @@ public class DoctorHome extends BaseTitleActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "initView: Oncreat");
         ButterKnife.bind(this);
         datas = new ArrayList<>(50);
         for (int i = 0; i < 50; i++) {
@@ -160,6 +161,29 @@ public class DoctorHome extends BaseTitleActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroy: ");
         srecyclerview.setRefreshingListener(null);
     }
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onCreate: ");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onRestoreInstanceState: ");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (Constance.DEBUGTAG)
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onSaveInstanceState: ");
+    }
+
 }

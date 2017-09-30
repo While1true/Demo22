@@ -1,9 +1,14 @@
 package com.kxjsj.doctorassistant.Appxx;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.ck.hello.nestrefreshlib.View.Adpater.Base.SimpleViewHolder;
 import com.ck.hello.nestrefreshlib.View.Adpater.DefaultStateListener;
@@ -43,10 +48,11 @@ public class SickbedF extends BaseFragment {
     private SBaseMutilAdapter baseMutilAdapter;
     private GridLayoutManager manager;
 
+
+
     @Override
     protected void initView(Bundle savedInstanceState) {
-        if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "initView: srecyclerview:" + (srecyclerview == null));
+        setRetainInstance(true);
         /**
          * 销毁重建的不重新初始化
          */
@@ -57,7 +63,6 @@ public class SickbedF extends BaseFragment {
              *
              */
             caculateSpanCount();
-            srecyclerview.addDefaultHeaderFooter();
             manager.setSpanCount(spancount);
             baseMutilAdapter.notifyDataSetChanged();
             return;
@@ -146,16 +151,16 @@ public class SickbedF extends BaseFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroyView: ");
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onSaveInstanceState: ");
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         if (Constance.DEBUGTAG)
-            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onDestroy: ");
+            Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onConfigurationChanged: ");
     }
 }
