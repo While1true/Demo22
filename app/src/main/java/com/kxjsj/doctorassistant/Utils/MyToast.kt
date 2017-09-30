@@ -6,8 +6,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 
@@ -16,7 +14,6 @@ import com.kxjsj.doctorassistant.R
 import com.kxjsj.doctorassistant.Screen.AdjustUtil
 import com.kxjsj.doctorassistant.Screen.StatusBarUtils
 import dp2px
-import log
 
 /**
  * Created by vange on 2017/9/27.
@@ -50,9 +47,9 @@ class MyToast private constructor(context: Context) {
          * 设置textview左边drawable
          */
         val drawable = context.resources.getDrawable(R.drawable.ic_toastinfo)
-        drawable.setBounds(0,0,dp2px(40f),dp2px(40f))
-        textView.setCompoundDrawables(drawable,null,null,null)
-        textView.compoundDrawablePadding=dp2px(15f)
+        drawable.setBounds(0, 0, dp2px(40f), dp2px(40f))
+        textView.setCompoundDrawables(drawable, null, null, null)
+        textView.compoundDrawablePadding = dp2px(15f)
 
         /**
          * textview属性
@@ -62,8 +59,11 @@ class MyToast private constructor(context: Context) {
         textView.setTextColor((0xffffffff).toInt())
         textView.gravity = Gravity.CENTER
 
-        val layoutParams = ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 55 +dp2px(56f))
-        textView.setPadding(dp2px(15f), 55, dp2px(70f), 0)
+        var statusbarHeight=StatusBarUtils.getStatusBarHeight(context)
+        val actuallyHeight : Int=(statusbarHeight*AdjustUtil.originalScreenScale/AdjustUtil.screenScale).toInt()
+
+        val layoutParams = ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, actuallyHeight + dp2px(56f))
+        textView.setPadding(dp2px(15f), actuallyHeight, dp2px(70f), 0)
         textView.layoutParams = layoutParams
 
         toast.view = textView
@@ -73,7 +73,7 @@ class MyToast private constructor(context: Context) {
         try {
             val method = toast.javaClass.getDeclaredMethod("getWindowParams")
             val layoutParams1 = method.invoke(toast) as WindowManager.LayoutParams
-            layoutParams1.height=55 +dp2px(56f)
+            layoutParams1.height = 55 + dp2px(56f)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -101,25 +101,32 @@ class MyToast private constructor(context: Context) {
          * @param during
          */
         fun showToaste(text: CharSequence, during: Int) {
-            myToast.textView.text = text
-            myToast.toast.duration = during
-            myToast.toast.show()
+                myToast.textView.text = text
+                myToast.toast.duration = during
+                myToast.toast.show()
         }
+
+        /**
+         * 在主线程初始化
+         * 不然在子线程调用崩溃
+         */
+        fun init(){myToast.textView.text=""}
+
         /**
          * 显示toast
          * @param text
          * @param during
          */
         fun showToasteLong(text: CharSequence, during: Int) {
-            showToaste(text,during)
-            myToast.textView.postDelayed({ myToast.toast.show() },3000L)
+                showToaste(text, during)
+            myToast.textView.postDelayed({ myToast.toast.show() }, 3000L)
 
         }
 
         /**
          * 取消toast
          */
-        fun cancel(){
+        fun cancel() {
             myToast.toast.cancel()
         }
     }

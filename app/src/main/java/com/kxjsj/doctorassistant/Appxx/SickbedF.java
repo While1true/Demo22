@@ -14,15 +14,19 @@ import com.ck.hello.nestrefreshlib.View.Adpater.Base.SimpleViewHolder;
 import com.ck.hello.nestrefreshlib.View.Adpater.DefaultStateListener;
 import com.ck.hello.nestrefreshlib.View.Adpater.SBaseMutilAdapter;
 import com.ck.hello.nestrefreshlib.View.RefreshViews.SRecyclerView;
+import com.kxjsj.doctorassistant.Component.BaseBottomSheetDialog;
 import com.kxjsj.doctorassistant.Component.BaseFragment;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.JavaBean.KotlinBean;
 import com.kxjsj.doctorassistant.R;
 import com.kxjsj.doctorassistant.Screen.OrentionUtils;
 import com.kxjsj.doctorassistant.Utils.K2JUtils;
+import com.kxjsj.doctorassistant.Utils.MessageUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,7 +108,9 @@ public class SickbedF extends BaseFragment {
                 }).addType(R.layout.sickbed_item_bed, new SBaseMutilAdapter.ITEMHOLDER<KotlinBean.SickBedBean>() {
                     @Override
                     public void onBind(SimpleViewHolder holder, KotlinBean.SickBedBean item, int position) {
-                        holder.itemView.setOnClickListener(view -> K2JUtils.toast(item.getName(),1));
+                        holder.itemView.setOnClickListener(view -> {
+                            K2JUtils.toast(item.getName(),1);
+                        });
                         holder.setText(R.id.textView, item.getName());
                     }
 
@@ -163,4 +169,5 @@ public class SickbedF extends BaseFragment {
         if (Constance.DEBUGTAG)
             Log.i(Constance.DEBUG + "--" + getClass().getSimpleName() + "--", "onConfigurationChanged: ");
     }
+
 }

@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.bumptech.glide.Glide;
 import com.kxjsj.doctorassistant.RongYun.RongYunInitialUtils;
 import com.kxjsj.doctorassistant.Screen.AdjustUtil;
+import com.kxjsj.doctorassistant.Utils.MessageUtils;
 
 
 /**
@@ -47,6 +48,7 @@ public class App extends Application {
 
     private void init() {
         RongYunInitialUtils.init(this);
+        MessageUtils.init(this);
     }
 
 }

@@ -13,6 +13,7 @@ import com.ck.hello.nestrefreshlib.View.Adpater.Base.SimpleViewHolder;
 import com.ck.hello.nestrefreshlib.View.Adpater.DefaultStateListener;
 import com.ck.hello.nestrefreshlib.View.Adpater.SBaseMutilAdapter;
 import com.ck.hello.nestrefreshlib.View.RefreshViews.SRecyclerView;
+import com.kxjsj.doctorassistant.Component.BaseBottomSheetDialog;
 import com.kxjsj.doctorassistant.Component.BaseTitleActivity;
 import com.kxjsj.doctorassistant.Constant.Constance;
 import com.kxjsj.doctorassistant.JavaBean.KotlinBean.*;
@@ -123,6 +124,7 @@ public class DoctorHome extends BaseTitleActivity {
      * @param item
      */
     private void askQuestion(DoctorInfo item) {
+
         new MaterialDialog.Builder(this)
                 .title("留言提问")
                 .content("留言可能不能及时收到回复，请谅解\n您可以试着先看看别人的提问，也许可以找到你想要的答案")

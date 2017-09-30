@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        ConversationUtils.openChartList(this);
+        MyToast.Companion.init();
         Observable.just(1)
               .observeOn(Schedulers.io())
               .map(integer -> {
